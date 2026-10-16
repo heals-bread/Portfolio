@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Coming Soon</title>
+<title>Aleksandr Skvortsov | Portfolio Coming Soon</title>
 <meta name="description" content="Portfolio coming soon. Meanwhile, help me make some money.">
 <meta name="theme-color" content="#A4C0F8">
 <link rel="icon" href="favicon.ico" sizes="any">
@@ -14,7 +14,7 @@
 <!-- Link previews (Telegram, Slack, X, Facebook…) -->
 <meta property="og:url" content="https://aleksandrskvortsov.vercel.app/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Coming Soon — portfolio">
+<meta property="og:title" content="Aleksandr Skvortsov | Portfolio Coming Soon">
 <meta property="og:description" content="Portfolio in progress. Meanwhile, help me make some money — a tiny pixel game.">
 <meta property="og:image" content="https://aleksandrskvortsov.vercel.app/assets/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -140,12 +140,15 @@ a{color:#454A8C}a:hover{color:#2D315F}
 @media (max-width:760px){
 .scene{padding:124px 16px 0 !important}
 .topnote{top:64px;width:calc(100% - 32px);justify-content:center;flex-wrap:wrap;white-space:normal;text-align:center;gap:8px 12px;font-size:13px}
-.title{white-space:normal !important;font-size:clamp(64px,25vw,150px) !important;line-height:0.86 !important}
+.title{white-space:normal !important;font-size:clamp(48px,min(25vw,12.5svh),150px) !important;line-height:0.86 !important}
+/* phones: the whole scene fits one screen, no scrolling needed to reach the game */
+.scene{height:100svh;min-height:0 !important}
+.spacer{min-height:8px !important}
 .toolbar{top:10px;left:8px;gap:2px}.mute{padding:0 10px}.tbtn{min-width:32px;height:32px;padding:0 8px}
 .mute-text{display:none}
 .clock{top:16px;right:16px;gap:8px}
 .clock-label{display:none}
-.floor{height:260px !important}
+.floor{height:min(260px,30svh) !important}
 .hud{gap:14px !important;font-size:14px !important;flex-wrap:wrap;justify-content:center}
 .noise-bar{width:96px !important}
 .card{padding:26px 20px 22px !important;gap:12px !important;border-radius:16px !important}
@@ -232,7 +235,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 </sc-if>
 </div>
 
-<div style="flex: 1 1 auto; min-height: 120px"></div>
+<div class="spacer" style="flex: 1 1 auto; min-height: 120px"></div>
 
 <div class="floor" style="position: relative; width: 100%; max-width: 1400px; height: 360px; flex: none">
 <img class="plant plant-a" ref="{{setP0}}" src="assets/plant-palm.png" alt="" style="position: absolute; left: 4%; bottom: 46px; visibility: {{decorVis}}">
@@ -297,7 +300,10 @@ a{color:#454A8C}a:hover{color:#2D315F}
 <div class="card" role="dialog" aria-modal="true" aria-labelledby="result-title" style="--ink: {{cInk}}; --on-ink: {{cOnInk}}; --ink-hover: {{cHover}}; --ink-soft: {{cSoft}}; --sub: {{cSub}}; --panel: {{cPanel}}; --danger: {{cDanger}}; width: 100%; max-width: 480px; box-sizing: border-box; padding: 36px 32px 32px; background: {{cBg}}; border: 1px solid {{cBorder}}; border-radius: 20px; box-shadow: 0 24px 60px rgba(45,49,95,.28); display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; color: var(--ink)">
 <sc-if value="{{failed}}" hint-placeholder-val="{{ false }}">
 <sc-if value="{{failNoise}}" hint-placeholder-val="{{ false }}">
-<img src="assets/wife-angry.png" alt="My wife, woken up and furious" style="width: 168px; height: auto; image-rendering: pixelated">
+<img src="assets/wife-angry.png" alt="My wife, woken up and furious" style="width: 183px; height: auto; image-rendering: pixelated">
+</sc-if>
+<sc-if value="{{failMe}}" hint-placeholder-val="{{ false }}">
+<img src="assets/me-fail.png" alt="Me, panicking in front of a burning screen" width="183" height="154" style="display: block; image-rendering: pixelated">
 </sc-if>
 <h2 id="result-title" class="fail" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{failTitle}}</h2>
 <sc-if value="{{failPlant}}" hint-placeholder-val="{{ true }}">
@@ -311,6 +317,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 </sc-if>
 </sc-if>
 <sc-if value="{{won}}" hint-placeholder-val="{{ true }}">
+<img src="assets/me-success.png" alt="Me, giving a thumbs up" width="183" height="154" style="display: block; image-rendering: pixelated">
 <h2 id="result-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">Shift’s over!</h2>
 <p style="margin: 0; font-size: 17px; color: var(--sub)">You helped me make</p>
 </sc-if>
@@ -748,7 +755,12 @@ class Component extends DCLogic {
     return out;
   }
   // wife's speech bubble pops out of the monitor, types its line, then the shift starts
+  // phones: bring the play area fully into view when a shift starts
+  scrollToGame() {
+    try { if (window.innerWidth <= 760) window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }); } catch (err) {}
+  }
   startDialog(level) {
+    this.scrollToGame();
     level = level === 2 ? 2 : 1;
     this.nightMode = !!this.palette().isNight;
     this.audio(); this.musicPlay(true); // inside the click, so browsers allow the audio
@@ -772,6 +784,7 @@ class Component extends DCLogic {
     this.dlgT = setTimeout(() => { this.setState({ dialog: false, dialogOut: false }); this.startGame(this.state.level); }, skip ? 120 : 260);
   }
   startGame(level) {
+    this.scrollToGame();
     level = level === 2 ? 2 : 1;
     this.obsAcc = 0; this.nextObs = 4200; this.endReq = false;
     const startObs = []; // scene plants simply disappear on Hard
@@ -988,6 +1001,7 @@ class Component extends DCLogic {
       failPlant: s.over && s.failed && s.failReason === 'plant',
       failEdge: s.over && s.failed && s.failReason === 'edge',
       failNoise: s.over && s.failed && s.failReason === 'noise',
+      failMe: s.over && s.failed && s.failReason !== 'noise',
       failTitle: s.failReason === 'noise' ? 'You woke up my wife!' : 'Fail!',
       muted: !!s.muted, soundOn: !s.muted, mutedStr: s.muted ? 'true' : 'false',
       muteText: s.muted ? 'Sound Off' : 'Sound On', muteLabel: s.muted ? 'Turn sound on' : 'Turn sound off',
