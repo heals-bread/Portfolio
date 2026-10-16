@@ -70,6 +70,40 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .obs{position:absolute;left:0;bottom:6px;width:auto;image-rendering:pixelated;pointer-events:none;will-change:transform}
 .lvl{font-family:'Press Start 2P',monospace;font-weight:400;font-size:11px;padding:7px 12px;border-radius:999px;background:var(--ink);color:var(--on-ink)}
 .fail{color:#B3263E}
+/* rules popup (from the Figma frames, scaled up to the earlier popup text sizes) */
+.ic{width:100%;max-width:440px;box-sizing:border-box;padding:32px 32px 28px;border-radius:24px;box-shadow:0 24px 60px rgba(20,14,60,.28);display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;color:var(--ink);font-family:'Inter',sans-serif}
+.ic-tiles{display:flex;gap:8px}
+.ic-tiles img{display:block;width:180px;height:76px;image-rendering:pixelated}
+.ic-tile{display:block;width:130px;height:147px;image-rendering:pixelated}
+.ic-title{margin:0;font-family:'Press Start 2P',monospace;font-weight:400;font-size:22px;line-height:1.5;color:var(--ink)}
+.ic-rush{display:flex;flex-direction:column;gap:6px;margin-top:-8px;font-size:15px;line-height:1.3;color:#F27E97}
+.ic-rush strong{color:#EE5576;font-weight:700}
+.ic-rush b{font-family:'Press Start 2P',monospace;font-weight:400;font-size:13px}
+.ic-panel{width:100%;box-sizing:border-box;padding:18px 18px 16px;border-radius:20px;background:var(--panel);border:1px solid var(--panel-border);display:flex;flex-direction:column;align-items:center;gap:12px}
+.ic-panel p{margin:0;font-size:16px;line-height:1.55;color:var(--sub)}
+.ic-panel p.ic-strong{font-weight:700;color:var(--ink)}
+.key{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border:2px solid var(--ink);border-radius:6px;box-shadow:0 3px 0 var(--ink);font-family:'Press Start 2P',monospace;font-size:11px;color:var(--ink);background:var(--panel);vertical-align:middle}
+.key-sm{height:24px;font-size:9px;padding:0 6px;box-shadow:0 2px 0 var(--ink)}
+.key-wide{min-width:68px}
+.ic-keys{display:flex;align-items:center;justify-content:center;gap:8px}
+.ic-keylabel{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--ink);margin:0 12px 0 4px}
+.ic-touch{margin:0;display:none;font-size:15px;color:var(--sub)}
+.ic-noise{display:flex;align-items:center;gap:10px}
+.ic-noise-label{font-family:'Press Start 2P',monospace;font-size:14px;color:var(--ink);margin-right:2px}
+.ic-bar{position:relative;display:inline-block;width:170px;height:17px;box-sizing:border-box;border:2px solid var(--ink);border-radius:3px;background:#1C173A;overflow:hidden}
+.ic-bar-fill{position:absolute;left:0;top:0;bottom:0;width:62%;background:var(--ink)}
+.ic-bar-red{position:absolute;right:0;top:0;bottom:0;width:24%;background:#F8657C}
+.ic-dot{width:14px;height:14px;box-sizing:border-box;border-radius:50%;border:2px solid #F8657C}
+.ic-dot.on{background:#F8657C}
+.ic-actions{display:flex;gap:14px;width:100%;margin-top:4px}
+.ic-btn{flex:1;min-height:52px;border-radius:999px;font-family:'Inter',sans-serif;font-weight:600;font-size:17px;cursor:pointer}
+.ic-btn-main{border:2px solid var(--ink);background:var(--ink);color:var(--on-ink)}
+.ic-btn-main:hover{background:var(--ink-hover);border-color:var(--ink-hover)}
+.ic-btn-ghost{border:2px solid var(--ink);background:transparent;color:var(--ink)}
+.ic-btn-ghost:hover{background:var(--ink-soft)}
+.ic-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+@media (max-width:460px){.ic{padding:24px 20px 22px;gap:16px}.ic-title{font-size:18px}.ic-panel p{font-size:14px}.ic-tiles img{width:150px;height:63px}.ic-tile{width:104px;height:117px}.ic-bar{width:120px}}
+
 .btn-play{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px 0 20px;font-family:'Inter',sans-serif;font-weight:500;font-size:19px;letter-spacing:-0.01em}
 .seg-main .seg-btn{font-family:'Inter',sans-serif;font-weight:500;font-size:19px;min-height:44px;padding:0 20px}
 .seg-main{box-shadow:inset 0 0 0 2px var(--ink)}
@@ -83,7 +117,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .pad{display:none}
 .pad-btn{width:72px;height:72px;border-radius:50%;border:2px solid var(--ink);background:var(--on-ink);color:var(--ink);display:flex;align-items:center;justify-content:center;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;box-shadow:0 6px 16px rgba(20,14,60,.25)}
 .pad-btn:active{background:var(--ink);color:var(--on-ink)}
-@media (hover:none){.pad{display:flex}.keys-hint{display:none !important}.touch-hint{display:flex !important}}
+@media (hover:none){.pad{display:flex}.keys-hint{display:none !important}.touch-hint{display:flex !important}.ic-touch{display:block !important}}
 .scene{min-height:100svh !important}
 .pad-btn{opacity:.88}
 @media (max-width:1240px) and (min-width:761px){.topnote{top:66px}.scene{padding-top:112px !important}}
@@ -207,40 +241,36 @@ a{color:#454A8C}a:hover{color:#2D315F}
 
 <sc-if value="{{intro}}" hint-placeholder-val="{{ false }}">
 <div style="position: absolute; inset: 0; z-index: 8; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(45,49,95,.35)">
-<div class="card" role="dialog" aria-modal="true" aria-labelledby="intro2-title" style="--ink: {{cInk}}; --on-ink: {{cOnInk}}; --ink-hover: {{cHover}}; --ink-soft: {{cSoft}}; --sub: {{cSub}}; --panel: {{cPanel}}; --danger: {{cDanger}}; width: 100%; max-width: 480px; box-sizing: border-box; padding: 36px 32px 32px; background: {{cBg}}; border: 1px solid {{cBorder}}; border-radius: 20px; box-shadow: 0 24px 60px rgba(45,49,95,.28); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; color: var(--ink)">
-<sc-if value="{{introHard}}" hint-placeholder-val="{{ true }}">
-<img src="assets/plant-ficus.png" alt="" style="height: 96px; width: auto">
-<h2 id="intro2-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{hardTitle}}</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.5; color: var(--sub)">The floor is about to start moving. Plants will ride in from the left — jump over them with <span class="kbd">space</span>. Crash into one and it’s game over.</p>
-</sc-if>
-<sc-if value="{{introNightOnly}}" hint-placeholder-val="{{ false }}">
-<img src="assets/plant-palm.png" alt="" style="height: 96px; width: auto">
-<h2 id="intro2-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{easyTitle}}</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.5; color: var(--sub)">Catch the falling cash, but don’t bump into the plants on the sides — jump over them with <span class="kbd">space</span>. Bump into one and it’s game over.</p>
-</sc-if>
+<div class="ic" role="dialog" aria-modal="true" aria-labelledby="intro2-title" style="--ink: {{cInk}}; --on-ink: {{cOnInk}}; --ink-hover: {{cHover}}; --ink-soft: {{cSoft}}; --sub: {{cSub}}; --panel: {{cPanel}}; --panel-border: {{cPanelBorder}}; --danger: {{cDanger}}; background: {{cBg}}; border: 1.5px solid {{cBorder}}">
 <sc-if value="{{isNight}}" hint-placeholder-val="{{ false }}">
-<div style="width: 100%; box-sizing: border-box; padding: 18px 18px 16px; border-radius: 14px; background: var(--panel); display: flex; flex-direction: column; align-items: center; gap: 12px">
-<div aria-hidden="true" style="display: flex; align-items: center; gap: 10px; font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--ink)">
-<span>NOISE</span>
-<span style="position: relative; display: inline-block; width: 150px; height: 16px; border: 2px solid var(--ink); border-radius: 4px; overflow: hidden">
-<span style="position: absolute; top: 0; bottom: 0; left: 75%; right: 0; background: rgba(255,92,120,.35)"></span>
-<span style="position: absolute; top: 0; bottom: 0; left: 0; width: 62%; background: #FF9F43"></span>
-</span>
-<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86; background: #FF6B86"></span>
-<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86"></span>
-<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86"></span>
-</div>
-<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--sub); text-align: left">Every landing makes noise, and it fades when you stay on the ground. Each time the meter hits the <strong style="color: var(--danger)">red zone</strong> you get a strike — <strong style="color: var(--ink)">3 strikes</strong> and my wife wakes up.</p>
-</div>
+<div class="ic-tiles"><img src="assets/tile-night-plants.png" alt="" width="143" height="60"><img src="assets/tile-night-wife.png" alt="" width="143" height="60"></div>
 </sc-if>
+<sc-if value="{{introTileOne}}" hint-placeholder-val="{{ true }}">
+<img class="ic-tile" src="{{introTileSrc}}" alt="" width="101" height="114">
+</sc-if>
+<h2 id="intro2-title" class="ic-title">{{introTitle}}</h2>
 <sc-if value="{{isSunset}}" hint-placeholder-val="{{ false }}">
-<p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 12px; line-height: 1.7; color: var(--ink)">Sunset rush: time is money!<br><span style="font-family: 'Onest', sans-serif; font-size: 15px; color: var(--sub)">Cash falls 2× faster.</span></p>
+<div class="ic-rush"><strong>Sunset rush: time is money!</strong><span>Cash falls <b>×2</b> faster</span></div>
 </sc-if>
-<p class="keys-hint" style="margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; font-size: 15px; color: var(--sub)"><span class="kbd">←</span><span class="kbd">→</span> move <span class="kbd" style="margin-left: 8px">space</span> jump</p>
-<p class="touch-hint" style="margin: 0; display: none; justify-content: center; font-size: 15px; color: var(--sub)">Use the ◀ ▶ buttons to move and ▲ to jump</p>
-<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 6px">
-<button class="btn" type="button" onClick="{{go2}}">Let’s go</button>
-<button class="btn btn-ghost" type="button" onClick="{{cancelIntro}}">Back</button>
+<div class="ic-panel">
+<p>{{introRule}} <span class="key key-sm">Space</span></p>
+<p class="ic-strong">{{introRuleBold}}</p>
+</div>
+<sc-if value="{{isNight}}" hint-placeholder-val="{{ false }}">
+<div class="ic-panel">
+<div class="ic-noise" aria-hidden="true">
+<span class="ic-noise-label">NOISE</span>
+<span class="ic-bar"><span class="ic-bar-fill"></span><span class="ic-bar-red"></span></span>
+<span class="ic-dot on"></span><span class="ic-dot"></span><span class="ic-dot"></span>
+</div>
+<p>Every landing makes noise, and it fades when you stay on the ground. Each time the meter hits the red zone you get a strike — 3 strikes and my wife wakes up.</p>
+</div>
+</sc-if>
+<div class="ic-keys keys-hint"><span class="key">←</span><span class="key">→</span><span class="ic-keylabel">Move</span><span class="key key-wide">Space</span><span class="ic-keylabel">Jump</span></div>
+<p class="touch-hint ic-touch">Use the ◀ ▶ buttons to move and ▲ to jump</p>
+<div class="ic-actions">
+<button class="ic-btn ic-btn-main" type="button" onClick="{{go2}}">Let’s go</button>
+<button class="ic-btn ic-btn-ghost" type="button" onClick="{{cancelIntro}}">Back</button>
 </div>
 </div>
 </div>
@@ -495,7 +525,7 @@ class Component extends DCLogic {
     this.play = () => this.showIntro(this.state.level);
     this.pickEasy = () => this.setState({ level: 1 });
     this.pickHard = () => this.setState({ level: 2 });
-    this.menu = () => { this.px = null; this.setState({ over: false, failed: false, px: null, jump: 0 }); };
+    this.menu = () => { this.musicStop(true); this.px = null; this.setState({ over: false, failed: false, px: null, jump: 0 }); };
     this.start2 = () => this.showIntro(2);
     this.go2 = () => this.startDialog(this.state.level);
     this.lines = {
@@ -505,7 +535,7 @@ class Component extends DCLogic {
     };
     this.dialogLine = this.lines.day.text; this.dialogAva = this.lines.day.ava;
     // default follows local time; a click overrides it for this visit only
-    const pick = (v) => () => { if (this.state.running) return; this.setState({ themePick: v }); };
+    const pick = (v) => () => { if (this.state.running) return; if (v === 'night') this.musicStop(true); this.setState({ themePick: v }); };
     this.pickDay = pick('day'); this.pickSunset = pick('sunset'); this.pickNight = pick('night');
     this.cancelIntro = () => this.setState({ intro: false });
     this.restart = () => this.startGame(this.state.level);
@@ -517,6 +547,8 @@ class Component extends DCLogic {
     try { if (window.localStorage.getItem('coming-soon-muted') === '1') this.setState({ muted: true }); } catch (err) {}
     this.setState({ tod: this.timeOfDay(), clockText: this.clockNow() });
     this.clock = setInterval(() => {
+      // safety net: music only belongs to a running shift (or the wife's bubble right before it)
+      if (!this.isRunning && !this.state.dialog && !this.fadeT && this.music && !this.music.paused) this.musicStop(true);
       const c = this.clockNow(), t = this.timeOfDay();
       if (c !== this.state.clockText || t !== this.state.tod) this.setState({ clockText: c, tod: t });
     }, 1000);
@@ -539,11 +571,16 @@ class Component extends DCLogic {
     const m = this.music; if (!m) return;
     if (this.fadeT) { clearInterval(this.fadeT); this.fadeT = null; }
     if (now) { try { m.pause(); } catch (err) {} return; }
+    // iPhone/iPad Safari ignores .volume (always 1), so a volume fade never finishes there:
+    // fade where volume works, and always hard-stop after 600 ms as a safety net
+    const start = Date.now();
     this.fadeT = setInterval(() => {
       try {
-        m.volume = Math.max(0, m.volume - 0.04);
-        if (m.volume <= 0.01) { m.pause(); clearInterval(this.fadeT); this.fadeT = null; }
-      } catch (err) { clearInterval(this.fadeT); this.fadeT = null; }
+        const before = m.volume;
+        m.volume = Math.max(0, before - 0.04);
+        const stuck = m.volume === before;
+        if (m.volume <= 0.01 || stuck || Date.now() - start > 600) { m.pause(); clearInterval(this.fadeT); this.fadeT = null; }
+      } catch (err) { try { m.pause(); } catch (e) {} clearInterval(this.fadeT); this.fadeT = null; }
     }, 40);
   }
   // day / night by the viewer's local time (sunset slot reserved for the upcoming design)
@@ -572,13 +609,18 @@ class Component extends DCLogic {
   }
   // popup cards: dark at night, light otherwise
   cardColors() {
-    if (this.palette().isNight) return {
-      cBg: '#1E1745', cBorder: 'rgba(224,187,84,.28)', cInk: '#E0BB54', cOnInk: '#1A1240', cHover: '#ECCB72',
-      cSoft: 'rgba(224,187,84,.14)', cSub: '#B8B2D8', cPanel: '#2A2259', cDanger: '#FF7A92'
+    const t = this.themeName();
+    if (t === 'night') return {
+      cBg: '#1C173A', cBorder: 'transparent', cInk: '#E0BB54', cOnInk: '#1C173A', cHover: '#ECCB72',
+      cSoft: 'rgba(224,187,84,.14)', cSub: '#C9C3E8', cPanel: '#261F4C', cPanelBorder: 'transparent', cDanger: '#F8657C'
+    };
+    if (t === 'sunset') return {
+      cBg: 'linear-gradient(180deg, #E7DFFF 0%, #F6DFFF 100%)', cBorder: '#564589', cInk: '#564589', cOnInk: '#FFFFFF', cHover: '#463775',
+      cSoft: 'rgba(86,69,137,.1)', cSub: '#7A6CA6', cPanel: '#F7EDFF', cPanelBorder: '#564589', cDanger: '#E5476A'
     };
     return {
-      cBg: '#F4F6FB', cBorder: 'transparent', cInk: '#454A8C', cOnInk: '#FFFFFF', cHover: '#363B78',
-      cSoft: 'rgba(69,74,140,.1)', cSub: '#5C618F', cPanel: '#E6EAF5', cDanger: '#C2334F'
+      cBg: '#F2F6FF', cBorder: 'transparent', cInk: '#454889', cOnInk: '#FFFFFF', cHover: '#363B78',
+      cSoft: 'rgba(69,72,137,.1)', cSub: '#6F6C99', cPanel: '#DAE0EC', cPanelBorder: '#8A93C8', cDanger: '#C2334F'
     };
   }
   // which time of day to show: the visitor's switch wins, then the Tweaks setting, then local time
@@ -912,6 +954,11 @@ class Component extends DCLogic {
       ...this.amountType(),
       introHard: s.level === 2,
       introNightOnly: s.level !== 2,
+      introTitle: s.level === 2 ? (this.palette().isNight ? 'Don’t wreck the plants & don’t wake my wife!' : 'Don’t wreck the plants!') : (this.palette().isNight ? 'Mind the plants & don’t wake my wife!' : 'Mind the plants!'),
+      introRule: s.level === 2 ? 'The floor is about to start moving. Plants will ride in from the left — jump over them with' : 'Catch the falling cash, but don’t bump into the plants on the sides — jump over them with',
+      introRuleBold: s.level === 2 ? 'Crash into one and it’s game over' : 'Bump into one and it’s game over',
+      introTileOne: !this.palette().isNight,
+      introTileSrc: this.themeName() === 'sunset' ? 'assets/tile-sunset.png' : 'assets/tile-day.png',
       isSunset: this.themeName() === 'sunset',
       easyTitle: this.palette().isNight ? 'Mind the plants & don’t wake my wife!' : 'Mind the plants!',
       hardTitle: this.palette().isNight ? 'Don’t wreck the plants & don’t wake my wife!' : 'Don’t wreck the plants!',
