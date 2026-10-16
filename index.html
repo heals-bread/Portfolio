@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coming Soon</title>
+<meta name="description" content="Portfolio coming soon. Meanwhile, help me make some money.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&amp;family=Silkscreen:wght@400;700&amp;family=Press+Start+2P&amp;family=VT323&amp;family=Inter:wght@400;500;600&amp;family=Onest:wght@400;500;600&amp;family=Pixelify+Sans:wght@500;700&amp;display=swap">
+<style>
+body{margin:0;background:#DAE0EE}
+a{color:#454A8C}a:hover{color:#2D315F}
+.me{background-image:url(assets/me-typing.png);background-repeat:no-repeat;image-rendering:pixelated}
+.bubble{position:absolute;left:50%;bottom:350px;z-index:6;transform:translateX(-50%);transform-origin:50% 100%;pointer-events:none;animation:bubbleIn .38s cubic-bezier(.2,1.4,.4,1) both}
+.bubble.out{animation:bubbleOut .26s ease-in both}
+@keyframes bubbleIn{from{transform:translateX(-50%) translateY(40px) scale(.1);opacity:0}to{transform:translateX(-50%) translateY(0) scale(1);opacity:1}}
+@keyframes bubbleOut{to{transform:translateX(-50%) translateY(30px) scale(.2);opacity:0}}
+.bubble-card{display:flex;align-items:center;gap:20px;width:max-content;max-width:min(520px,calc(100vw - 32px));box-sizing:border-box;padding:14px 26px 14px 14px;border-radius:22px;box-shadow:0 16px 40px rgba(20,14,60,.22)}
+.bubble-tail{position:absolute;left:50%;bottom:-11px;width:22px;height:22px;transform:translateX(-50%) rotate(45deg);border-radius:3px}
+.bubble-ava{width:104px;height:104px;flex:none;border-radius:18px;background:#E8D9FB;overflow:hidden}
+.bubble-ava img{width:100%;height:100%;display:block;image-rendering:pixelated}
+.bubble-name{font-family:'Press Start 2P',monospace;font-size:14px;line-height:1.4;margin-bottom:12px}
+.bubble-text{font-family:'Press Start 2P',monospace;font-size:13px;line-height:1.9;max-width:300px}
+.me-big{width:340px;height:348px;background-size:1360px 348px;animation:typeBig .48s steps(4) infinite}
+@keyframes typeBig{to{background-position:-1360px 0}}
+.pix{image-rendering:pixelated}
+.spot{position:absolute;top:-40px;bottom:0;width:780px;max-width:120vw;z-index:0;pointer-events:none;clip-path:polygon(13% 0,87% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(178,158,72,.85) 0%,rgba(160,140,78,.55) 35%,rgba(150,130,90,.22) 60%,rgba(140,120,110,0) 80%);filter:blur(22px)}
+.scene{transition:background-color .6s}
+/* textured pixel gradients: Bayer-dithered strips, each pixel shown as a crisp 4px block */
+.bgtex{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background-repeat:repeat-x;background-size:32px 100%;image-rendering:pixelated}
+.bg-day{background-image:url(assets/bg-day.png)}
+.bg-sunset{background-image:url(assets/bg-sunset.png)}
+.bg-night{background-image:url(assets/bg-night.png)}
+.toolbar{position:absolute;top:28px;left:28px;z-index:3;display:flex;align-items:center;gap:6px}
+.theme-seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink-soft)}
+.tbtn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:var(--ink);font-family:'Inter',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+.tbtn:hover{background:var(--ink-soft)}
+.tbtn.on{background:var(--ink);color:var(--on-ink)}
+.tbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.tbtn:disabled{opacity:.45;cursor:default}
+.mute{position:relative;display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 10px 0 2px;border:0;border-radius:10px;background:transparent;color:var(--ink);font-family:'Press Start 2P',monospace;font-weight:400;font-size:11px;cursor:pointer}
+.mute-ico{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:var(--ink);color:var(--on-ink)}
+.mute:hover{background:var(--ink-soft)}
+.mute:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.topnote{position:absolute;top:30px;left:50%;transform:translateX(-50%);z-index:3;display:flex;align-items:center;gap:6px;white-space:nowrap;font-family:'Inter',sans-serif;font-weight:400;font-size:22px;letter-spacing:-0.01em;color:var(--ink)}
+.behance{display:inline-flex;align-items:center;gap:6px;color:var(--ink) !important;font-weight:600;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;border-radius:4px}
+.behance:hover{color:var(--ink-hover) !important}
+.behance:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.clock{position:absolute;top:38px;right:28px;z-index:3;font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.4;color:var(--ink);pointer-events:none;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:760px){.clock{top:14px;right:16px}}
+.plant{height:190px;width:auto}
+@media (max-width:760px){.plant{height:114px}
+/* phones: edge plants tucked into the screen corners, only half showing */
+.plant-a{left:-16px !important;transform:translateX(-50%)}
+.plant-c{right:-16px !important;transform:translateX(50%)}
+.plant-b{display:none}}
+.scene:focus{outline:none}
+.scene.playing{touch-action:none;user-select:none;-webkit-user-select:none}
+.bill{position:absolute;left:0;top:0;width:100px;height:46px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P',monospace;font-weight:400;font-size:13px;border:3px solid #2D315F;box-shadow:4px 4px 0 rgba(45,49,95,.35),inset 0 0 0 3px rgba(255,255,255,.45);will-change:transform;pointer-events:none}
+.b50{background:#BFE6C6;color:#1E4A2A}
+.b100{background:#86CF9C;color:#143A21}
+.b300{background:#F6D27A;color:#4A3500}
+.b500{background:#F3AACB;color:#4E1530}
+.pop{position:absolute;left:0;top:0;font-family:'Press Start 2P',monospace;font-weight:400;font-size:15px;color:var(--ink);pointer-events:none;white-space:nowrap}
+.btn{font-family:'Onest',sans-serif;font-weight:600;font-size:17px;padding:14px 26px;min-height:50px;background:var(--ink);color:var(--on-ink);border:0;border-radius:999px;cursor:pointer}
+.btn:hover{background:var(--ink-hover)}
+.btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.btn-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.btn-ghost:hover{background:var(--ink-soft)}
+.obs{position:absolute;left:0;bottom:6px;width:auto;image-rendering:pixelated;pointer-events:none;will-change:transform}
+.lvl{font-family:'Press Start 2P',monospace;font-weight:400;font-size:11px;padding:7px 12px;border-radius:999px;background:var(--ink);color:var(--on-ink)}
+.fail{color:#B3263E}
+.btn-play{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px 0 20px;font-family:'Inter',sans-serif;font-weight:500;font-size:19px;letter-spacing:-0.01em}
+.seg-main .seg-btn{font-family:'Inter',sans-serif;font-weight:500;font-size:19px;min-height:44px;padding:0 20px}
+.seg-main{box-shadow:inset 0 0 0 2px var(--ink)}
+.card .fail{color:var(--danger)}
+.seg{display:inline-flex;padding:4px;gap:4px;border-radius:999px;box-shadow:inset 0 0 0 2px var(--ink)}
+.seg-btn{font-family:'Onest',sans-serif;font-weight:600;font-size:16px;min-width:84px;min-height:42px;padding:8px 18px;border:0;border-radius:999px;background:transparent;color:var(--ink);cursor:pointer}
+.seg-btn:hover{background:var(--ink-soft)}
+.seg-btn.on{background:var(--ink);color:var(--on-ink)}
+.seg-btn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.kbd{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border:2px solid var(--ink);border-radius:6px;font-family:'Press Start 2P',monospace;font-weight:400;font-size:10px;box-shadow:0 3px 0 var(--ink)}
+.pad{display:none}
+.pad-btn{width:72px;height:72px;border-radius:50%;border:2px solid var(--ink);background:var(--on-ink);color:var(--ink);display:flex;align-items:center;justify-content:center;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;box-shadow:0 6px 16px rgba(20,14,60,.25)}
+.pad-btn:active{background:var(--ink);color:var(--on-ink)}
+@media (hover:none){.pad{display:flex}.keys-hint{display:none !important}.touch-hint{display:flex !important}}
+.scene{min-height:100svh !important}
+.pad-btn{opacity:.88}
+@media (max-width:1240px) and (min-width:761px){.topnote{top:66px}.scene{padding-top:112px !important}}
+@media (max-width:760px){
+.scene{padding:124px 16px 0 !important}
+.topnote{top:64px;width:calc(100% - 32px);justify-content:center;flex-wrap:wrap;white-space:normal;text-align:center;gap:8px 12px;font-size:13px}
+.title{white-space:normal !important;font-size:clamp(64px,25vw,150px) !important;line-height:0.86 !important}
+.toolbar{top:10px;left:8px;gap:2px}.mute{padding:0 10px}.tbtn{min-width:32px;height:32px;padding:0 8px}
+.mute-text{display:none}
+.clock{top:16px;right:16px;gap:8px}
+.clock-label{display:none}
+.floor{height:260px !important}
+.hud{gap:14px !important;font-size:14px !important;flex-wrap:wrap;justify-content:center}
+.noise-bar{width:96px !important}
+.card{padding:26px 20px 22px !important;gap:12px !important;border-radius:16px !important}
+.card h2{font-size:19px !important}
+.btn{font-size:16px;padding:13px 22px}
+.seg-btn{min-width:72px}
+.pad-btn{width:68px;height:68px}
+}
+@media (max-width:760px){.bubble{bottom:178px}.bubble-ava{width:72px;height:72px;border-radius:14px}.bubble-card{gap:14px;padding:10px 16px 10px 10px}.bubble-name{font-size:11px;margin-bottom:8px}.bubble-text{font-size:10px;max-width:210px}.me-big{width:170px;height:174px;background-size:680px 174px;animation-name:typeBigS}.bill{width:56px;height:28px;font-size:8px;border-width:2px;box-shadow:2px 2px 0 rgba(45,49,95,.35),inset 0 0 0 2px rgba(255,255,255,.45)}.pop{font-size:11px}.plant-l{width:80px !important}.plant-r{width:124px !important}}
+@media (max-width:760px){.me-shadow{width:100px !important;height:16px !important}}
+@keyframes typeBigS{to{background-position:-680px 0}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- Page markup: {{holes}} are filled from renderVals(), <sc-if>/<sc-for> are conditionals and loops -->
+<template id="dc-template">
+<main class="{{sceneClass}}" ref="{{setArena}}" tabIndex="0" onKeyDown="{{onKeyDown}}" onKeyUp="{{onKeyUp}}" onBlur="{{onBlur}}" onTouchStart="{{tStart}}" onTouchMove="{{tMove}}" onTouchEnd="{{tEnd}}" onTouchCancel="{{tEnd}}" style="--ink: {{ink}}; --on-ink: {{onInk}}; --ink-hover: {{inkHover}}; --ink-soft: {{inkSoft}}; --sub: {{sub}}; position: relative; min-height: 100vh; overflow: hidden; box-sizing: border-box; background-color: {{bg}}; color: {{ink}}; font-family: 'Onest', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 92px 24px 0">
+<sc-if value="{{bgDay}}" hint-placeholder-val="{{ true }}"><div class="bgtex bg-day" aria-hidden="true"></div></sc-if>
+<sc-if value="{{bgSunset}}" hint-placeholder-val="{{ false }}"><div class="bgtex bg-sunset" aria-hidden="true"></div></sc-if>
+<sc-if value="{{bgNight}}" hint-placeholder-val="{{ false }}"><div class="bgtex bg-night" aria-hidden="true"></div></sc-if>
+
+<sc-if value="{{isNight}}" hint-placeholder-val="{{ false }}">
+<div class="spot" aria-hidden="true" style="left: 50%; transform: translateX(-50%)"></div>
+</sc-if>
+
+<audio ref="{{setMusic}}" src="assets/music.mp3" loop="" preload="auto" aria-hidden="true"></audio>
+<div class="toolbar">
+<button class="mute" type="button" onClick="{{toggleMute}}" aria-label="{{muteLabel}}" aria-pressed="{{mutedStr}}">
+<sc-if value="{{soundOn}}" hint-placeholder-val="{{ true }}">
+<span class="mute-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"></path><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></svg></span>
+</sc-if>
+<sc-if value="{{muted}}" hint-placeholder-val="{{ false }}">
+<span class="mute-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5L6 9H3v6h3l5 4V5z"></path><path d="M22 9l-6 6"></path><path d="M16 9l6 6"></path></svg></span>
+</sc-if>
+<span class="mute-text">{{muteText}}</span>
+</button>
+<div class="theme-seg" role="group" aria-label="Time of day">
+<button class="{{tDayCls}}" type="button" aria-pressed="{{tDayOn}}" onClick="{{pickDay}}" aria-label="Day" title="Day"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button>
+<button class="{{tSunsetCls}}" type="button" aria-pressed="{{tSunsetOn}}" onClick="{{pickSunset}}" aria-label="Sunset" title="Sunset"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M17 18a5 5 0 0 0-10 0"></path><path d="M12 9V2M4.2 10.2l1.4 1.4M1 18h2M21 18h2M18.4 11.6l1.4-1.4M23 22H1M16 5l-4 4-4-4"></path></svg></button>
+<button class="{{tNightCls}}" type="button" aria-pressed="{{tNightOn}}" onClick="{{pickNight}}" aria-label="Night" title="Night"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
+</div>
+</div>
+
+<div class="topnote">
+<span>Page in progress, but for now you can visit</span>
+<a class="behance" href="https://www.behance.net/rombtider" target="_blank" rel="noopener noreferrer">Behance<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"></path><path d="M8 7h9v9"></path></svg></a>
+</div>
+
+<div class="clock" aria-label="Local time {{clockText}}"><span class="clock-label">Local time: </span>{{clockText}}</div>
+
+<h1 class="title" style="position: relative; z-index: 1; margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(76px, 15.5vw, 236px); line-height: 0.9; letter-spacing: -0.01em; color: {{titleColor}}; -webkit-text-stroke: 1.5px {{titleStroke}}; background-image: {{titleBg}}; -webkit-background-clip: text; background-clip: text; text-align: center; white-space: nowrap">COMING SOON</h1>
+
+<p style="position: relative; z-index: 1; margin: 30px 0 0; font-size: clamp(18px, 1.8vw, 26px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; text-align: center; color: {{subtitleColor}}">Meanwhile, help me make some money</p>
+
+<div style="margin-top: 30px; min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 20px; position: relative; z-index: 3">
+<sc-if value="{{showStart}}" hint-placeholder-val="{{ true }}">
+<button class="btn btn-play" type="button" onClick="{{play}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z" fill="currentColor"></path></svg>Get to work</button>
+<div class="seg seg-main" role="group" aria-label="Difficulty">
+<button class="{{easyClass}}" type="button" aria-pressed="{{easyOn}}" onClick="{{pickEasy}}">Easy</button>
+<button class="{{hardClass}}" type="button" aria-pressed="{{hardOn}}" onClick="{{pickHard}}">Hard</button>
+</div>
+</sc-if>
+<sc-if value="{{running}}" hint-placeholder-val="{{ false }}">
+<div class="hud" style="display: flex; align-items: center; gap: 24px; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 18px">
+<span class="lvl">{{lvlName}}</span>
+<span>${{scoreText}}</span>
+<span style="color: var(--sub)">{{timeText}}</span>
+<sc-if value="{{nightMode}}" hint-placeholder-val="{{ false }}">
+<span style="display: inline-flex; align-items: center; gap: 10px; font-size: 11px">
+<span style="color: var(--sub)">NOISE</span>
+<span class="noise-bar" style="position: relative; display: inline-block; width: 150px; height: 16px; border: 2px solid var(--ink); border-radius: 4px; overflow: hidden">
+<span style="position: absolute; top: 0; bottom: 0; left: 75%; right: 0; background: rgba(255,92,120,.35)"></span>
+<span style="position: absolute; top: 0; bottom: 0; left: 0; width: {{noisePct}}%; background: {{noiseColor}}"></span>
+</span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86; background: {{strike1}}"></span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86; background: {{strike2}}"></span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86; background: {{strike3}}"></span>
+</span>
+</sc-if>
+</div>
+<button class="btn btn-ghost" type="button" onClick="{{finish}}" style="min-height: 44px; padding: 10px 20px; font-size: 15px">End game</button>
+</sc-if>
+</div>
+
+<div style="flex: 1 1 auto; min-height: 120px"></div>
+
+<div class="floor" style="position: relative; width: 100%; max-width: 1400px; height: 360px; flex: none">
+<img class="plant plant-a" ref="{{setP0}}" src="assets/plant-palm.png" alt="" style="position: absolute; left: 4%; bottom: 46px; visibility: {{decorVis}}">
+<img class="plant plant-b" ref="{{setP1}}" src="assets/plant-ficus.png" alt="" style="position: absolute; right: calc(4% + 128px); bottom: 46px; visibility: {{decorVis}}">
+<img class="plant plant-c" ref="{{setP2}}" src="assets/plant-zz.png" alt="" style="position: absolute; right: 4%; bottom: 46px; visibility: {{decorVis}}">
+</div>
+
+<div class="me-shadow" style="position: absolute; left: {{meLeft}}; bottom: 0; width: 180px; height: 26px; z-index: 2; background: {{shadow}}; border-radius: 50%; transform: translateX({{shTx}}) scale({{shScale}})"></div>
+<div class="me me-big" ref="{{setMe}}" style="position: absolute; left: {{meLeft}}; bottom: 6px; z-index: 3; opacity: {{meOpacity}}; transform: translate({{meTx}}, {{meTy}}px)" aria-hidden="true"></div>
+<sc-if value="{{dialog}}" hint-placeholder-val="{{ false }}">
+<div class="{{bubbleClass}}" role="status" aria-live="polite">
+<div class="bubble-card" style="background: {{cBg}}; border: 1px solid {{cBorder}}">
+<div class="bubble-ava"><img src="{{avatarSrc}}" alt="Lovely Wife"></div>
+<div>
+<div class="bubble-name" style="color: {{bubbleName}}">Lovely Wife:</div>
+<div class="bubble-text" style="color: {{cSub}}">{{dialogShown}}<span style="visibility: hidden">{{dialogRest}}</span></div>
+</div>
+</div>
+<div class="bubble-tail" style="background: {{cBg}}"></div>
+</div>
+</sc-if>
+
+<sc-if value="{{intro}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; z-index: 8; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(45,49,95,.35)">
+<div class="card" role="dialog" aria-modal="true" aria-labelledby="intro2-title" style="--ink: {{cInk}}; --on-ink: {{cOnInk}}; --ink-hover: {{cHover}}; --ink-soft: {{cSoft}}; --sub: {{cSub}}; --panel: {{cPanel}}; --danger: {{cDanger}}; width: 100%; max-width: 480px; box-sizing: border-box; padding: 36px 32px 32px; background: {{cBg}}; border: 1px solid {{cBorder}}; border-radius: 20px; box-shadow: 0 24px 60px rgba(45,49,95,.28); display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; color: var(--ink)">
+<sc-if value="{{introHard}}" hint-placeholder-val="{{ true }}">
+<img src="assets/plant-ficus.png" alt="" style="height: 96px; width: auto">
+<h2 id="intro2-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{hardTitle}}</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.5; color: var(--sub)">The floor is about to start moving. Plants will ride in from the left — jump over them with <span class="kbd">space</span>. Crash into one and it’s game over.</p>
+</sc-if>
+<sc-if value="{{introNightOnly}}" hint-placeholder-val="{{ false }}">
+<img src="assets/plant-palm.png" alt="" style="height: 96px; width: auto">
+<h2 id="intro2-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{easyTitle}}</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.5; color: var(--sub)">Catch the falling cash, but don’t bump into the plants on the sides — jump over them with <span class="kbd">space</span>. Bump into one and it’s game over.</p>
+</sc-if>
+<sc-if value="{{isNight}}" hint-placeholder-val="{{ false }}">
+<div style="width: 100%; box-sizing: border-box; padding: 18px 18px 16px; border-radius: 14px; background: var(--panel); display: flex; flex-direction: column; align-items: center; gap: 12px">
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 10px; font-family: 'Press Start 2P', monospace; font-size: 11px; color: var(--ink)">
+<span>NOISE</span>
+<span style="position: relative; display: inline-block; width: 150px; height: 16px; border: 2px solid var(--ink); border-radius: 4px; overflow: hidden">
+<span style="position: absolute; top: 0; bottom: 0; left: 75%; right: 0; background: rgba(255,92,120,.35)"></span>
+<span style="position: absolute; top: 0; bottom: 0; left: 0; width: 62%; background: #FF9F43"></span>
+</span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86; background: #FF6B86"></span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86"></span>
+<span style="display: inline-block; width: 12px; height: 12px; box-sizing: border-box; border-radius: 50%; border: 2px solid #FF6B86"></span>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: var(--sub); text-align: left">Every landing makes noise, and it fades when you stay on the ground. Each time the meter hits the <strong style="color: var(--danger)">red zone</strong> you get a strike — <strong style="color: var(--ink)">3 strikes</strong> and my wife wakes up.</p>
+</div>
+</sc-if>
+<sc-if value="{{isSunset}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 12px; line-height: 1.7; color: var(--ink)">Sunset rush: time is money!<br><span style="font-family: 'Onest', sans-serif; font-size: 15px; color: var(--sub)">Cash falls 2× faster.</span></p>
+</sc-if>
+<p class="keys-hint" style="margin: 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; font-size: 15px; color: var(--sub)"><span class="kbd">←</span><span class="kbd">→</span> move <span class="kbd" style="margin-left: 8px">space</span> jump</p>
+<p class="touch-hint" style="margin: 0; display: none; justify-content: center; font-size: 15px; color: var(--sub)">Use the ◀ ▶ buttons to move and ▲ to jump</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 6px">
+<button class="btn" type="button" onClick="{{go2}}">Let’s go</button>
+<button class="btn btn-ghost" type="button" onClick="{{cancelIntro}}">Back</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{over}}" hint-placeholder-val="{{ false }}">
+<div style="position: absolute; inset: 0; z-index: 8; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(45,49,95,.35)">
+<div class="card" role="dialog" aria-modal="true" aria-labelledby="result-title" style="--ink: {{cInk}}; --on-ink: {{cOnInk}}; --ink-hover: {{cHover}}; --ink-soft: {{cSoft}}; --sub: {{cSub}}; --panel: {{cPanel}}; --danger: {{cDanger}}; width: 100%; max-width: 480px; box-sizing: border-box; padding: 36px 32px 32px; background: {{cBg}}; border: 1px solid {{cBorder}}; border-radius: 20px; box-shadow: 0 24px 60px rgba(45,49,95,.28); display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; color: var(--ink)">
+<sc-if value="{{failed}}" hint-placeholder-val="{{ false }}">
+<sc-if value="{{failNoise}}" hint-placeholder-val="{{ false }}">
+<img src="assets/wife-angry.png" alt="My wife, woken up and furious" style="width: 168px; height: auto; image-rendering: pixelated">
+</sc-if>
+<h2 id="result-title" class="fail" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">{{failTitle}}</h2>
+<sc-if value="{{failPlant}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 17px; color: var(--sub)">You crashed into a plant. You still made</p>
+</sc-if>
+<sc-if value="{{failEdge}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 17px; color: var(--sub)">You bumped into a plant. You still made</p>
+</sc-if>
+<sc-if value="{{failNoise}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-size: 17px; color: var(--sub)">Too loud! You still made</p>
+</sc-if>
+</sc-if>
+<sc-if value="{{won}}" hint-placeholder-val="{{ true }}">
+<h2 id="result-title" style="margin: 0; font-family: 'Press Start 2P', monospace; font-weight: 400; font-size: 24px; line-height: 1.35;">Shift’s over!</h2>
+<p style="margin: 0; font-size: 17px; color: var(--sub)">You helped me make</p>
+</sc-if>
+<div style="font-family: {{amountFont}}; font-weight: {{amountWeight}}; font-size: {{amountSize}}px; line-height: 1.15; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; color: var(--ink); margin: 4px 0">${{scoreText}}</div>
+<sc-if value="{{failNoise}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 0; font-family: 'Press Start 2P', monospace; font-size: 13px; line-height: 1.6; color: var(--ink)">Was it worth it?</p>
+</sc-if>
+<sc-if value="{{won}}" hint-placeholder-val="{{ true }}">
+<p style="margin: 0; font-size: 17px; color: var(--ink)">{{verdict}}</p>
+</sc-if>
+<p style="margin: 0; font-size: 15px; color: var(--sub)">Best on {{lvlLower}}: ${{bestText}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 6px">
+<button class="btn" type="button" onClick="{{restart}}">Play again</button>
+<button class="btn btn-ghost" type="button" onClick="{{menu}}">Main menu</button>
+</div>
+</div>
+</div>
+</sc-if>
+
+<sc-for list="{{bills}}" as="b" hint-placeholder-count="0">
+<div class="bill b{{b.v}}" style="z-index: 4; transform: translate({{b.x}}px, {{b.y}}px) rotate({{b.rot}}deg)">${{b.v}}</div>
+</sc-for>
+
+<sc-for list="{{obs}}" as="o" hint-placeholder-count="0">
+<img class="obs" src="{{o.src}}" alt="" style="z-index: 4; bottom: {{o.b}}px; height: {{o.h}}px; transform: translateX({{o.x}}px) scaleX({{o.flip}})">
+</sc-for>
+
+<sc-for list="{{pops}}" as="p" hint-placeholder-count="0">
+<div class="pop" style="z-index: 5; transform: translate({{p.x}}px, {{p.y}}px); opacity: {{p.o}}">{{p.label}}</div>
+</sc-for>
+
+<sc-if value="{{running}}" hint-placeholder-val="{{ false }}">
+<div class="pad" style="position: absolute; left: 16px; right: 16px; bottom: 16px; z-index: 7; justify-content: space-between; align-items: flex-end; pointer-events: none">
+<div style="display: flex; gap: 12px; pointer-events: auto">
+<button class="pad-btn" type="button" aria-label="Move left" onPointerDown="{{leftDown}}" onPointerUp="{{leftUp}}" onPointerLeave="{{leftUp}}" onPointerCancel="{{leftUp}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"></path></svg></button>
+<button class="pad-btn" type="button" aria-label="Move right" onPointerDown="{{rightDown}}" onPointerUp="{{rightUp}}" onPointerLeave="{{rightUp}}" onPointerCancel="{{rightUp}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"></path></svg></button>
+</div>
+<div style="pointer-events: auto">
+<button class="pad-btn" type="button" aria-label="Jump" onPointerDown="{{jumpTap}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15l7-7 7 7"></path></svg></button>
+</div>
+</div>
+</sc-if>
+</main>
+</template>
+
+<script src="assets/vendor/react.production.min.js"></script>
+<script src="assets/vendor/react-dom.production.min.js"></script>
+<script>
+/* Tiny template runtime: renders the page's {{holes}}, <sc-if> and <sc-for> markup with React. */
+(function () {
+  var h = React.createElement;
+  var tpl = document.getElementById('dc-template').content;
+  var EVT = { onclick: 'onClick', onkeydown: 'onKeyDown', onkeyup: 'onKeyUp', onblur: 'onBlur',
+    ontouchstart: 'onTouchStart', ontouchmove: 'onTouchMove', ontouchend: 'onTouchEnd', ontouchcancel: 'onTouchCancel',
+    onpointerdown: 'onPointerDown', onpointerup: 'onPointerUp', onpointerleave: 'onPointerLeave', onpointercancel: 'onPointerCancel',
+    onmousemove: 'onMouseMove', onmousedown: 'onMouseDown', onmouseup: 'onMouseUp' };
+  var ATTR = { 'class': 'className', 'for': 'htmlFor', tabindex: 'tabIndex', readonly: 'readOnly', srcset: 'srcSet', crossorigin: 'crossOrigin' };
+  var BOOL = { loop: 'loop', muted: 'muted', controls: 'controls', autoplay: 'autoPlay', disabled: 'disabled', playsinline: 'playsInline' };
+  var HOLE = /\{\{\s*([^}]+?)\s*\}\}/g;
+  var ONLY = /^\s*\{\{\s*([^}]+?)\s*\}\}\s*$/;
+
+  function lookup(path, scope) {
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (path === 'null') return null;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return Number(path);
+    var parts = path.split('.'), v = scope;
+    for (var i = 0; i < parts.length; i++) { if (v == null) return undefined; v = v[parts[i]]; }
+    return v;
+  }
+  function interp(str, scope) {
+    return str.replace(HOLE, function (_, p) { var v = lookup(p, scope); return v == null ? '' : String(v); });
+  }
+  function attrValue(raw, scope) {
+    var m = raw.match(ONLY);
+    if (m) return lookup(m[1], scope);
+    return raw.indexOf('{{') >= 0 ? interp(raw, scope) : raw;
+  }
+  function styleObj(str) {
+    var o = {};
+    String(str).split(';').forEach(function (d) {
+      var i = d.indexOf(':'); if (i < 0) return;
+      var k = d.slice(0, i).trim(), v = d.slice(i + 1).trim();
+      if (!k) return;
+      if (k.indexOf('--') !== 0) k = k.replace(/-([a-z])/g, function (_, c) { return c.toUpperCase(); });
+      o[k] = v;
+    });
+    return o;
+  }
+  function renderNodes(nodes, scope, key) {
+    var out = [];
+    for (var i = 0; i < nodes.length; i++) {
+      var r = renderNode(nodes[i], scope, key + '.' + i);
+      if (r == null) continue;
+      if (Array.isArray(r)) out.push.apply(out, r); else out.push(r);
+    }
+    return out;
+  }
+  function renderNode(n, scope, key) {
+    if (n.nodeType === 3) return n.nodeValue.indexOf('{{') >= 0 ? interp(n.nodeValue, scope) : n.nodeValue;
+    if (n.nodeType !== 1) return null;
+    var tag = n.localName;
+    if (tag === 'sc-if') {
+      return attrValue(n.getAttribute('value') || '', scope)
+        ? h.apply(null, [React.Fragment, { key: key }].concat(renderNodes(n.childNodes, scope, key))) : null;
+    }
+    if (tag === 'sc-for') {
+      var list = attrValue(n.getAttribute('list') || '', scope) || [];
+      var as = n.getAttribute('as') || 'item';
+      return list.map(function (it, idx) {
+        var sc = Object.create(scope); sc[as] = it; sc.$index = idx;
+        var k = it && it.id != null ? it.id : idx;
+        return h.apply(null, [React.Fragment, { key: key + ':' + k }].concat(renderNodes(n.childNodes, sc, key + '.' + idx)));
+      });
+    }
+    var props = { key: key };
+    for (var a = 0; a < n.attributes.length; a++) {
+      var name = n.attributes[a].name, raw = n.attributes[a].value;
+      if (name.indexOf('hint-') === 0) continue;
+      var v = attrValue(raw, scope);
+      if (EVT[name]) { props[EVT[name]] = v; continue; }
+      if (name === 'ref') { props.ref = v; continue; }
+      if (name === 'style') { props.style = styleObj(v); continue; }
+      if (BOOL[name]) { props[BOOL[name]] = true; continue; }
+      props[ATTR[name] || name] = v;
+    }
+    return h.apply(null, [tag, props].concat(renderNodes(n.childNodes, scope, key)));
+  }
+
+  window.DCLogic = class DCLogic extends React.Component {
+    render() { return h.apply(null, [React.Fragment, null].concat(renderNodes(tpl.childNodes, this.renderVals(), 'r'))); }
+  };
+})();
+
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.noise = 0; this.strikes = 0; this.inDanger = false; this.nightMode = false;
+    this.state = { running: false, over: false, failed: false, level: 1, score: 0, caught: 0, missed: 0, timeLeft: 0, bills: [], pops: [], obs: [], px: null, jump: 0, best1: 0, best2: 0 };
+    this.plants = [
+      // h = the same height the plant has standing in the scene
+      { src: 'assets/plant-palm.png', ratio: 524 / 808, h: 190 },
+      { src: 'assets/plant-ficus.png', ratio: 332 / 608, h: 190 },
+      { src: 'assets/plant-zz.png', ratio: 552 / 956, h: 190 }
+    ];
+    this.plantEls = [null, null, null];
+    this.setP0 = (el) => { this.plantEls[0] = el; };
+    this.setP1 = (el) => { this.plantEls[1] = el; };
+    this.setP2 = (el) => { this.plantEls[2] = el; };
+    this.arena = null; this.meEl = null; this.raf = null; this.nextId = 1;
+    this.keys = { left: false, right: false };
+    this.px = null; this.jump = 0; this.vy = 0;
+    this.types = [
+      { v: 50, p: 0.42, s: [150, 200] },
+      { v: 100, p: 0.30, s: [180, 240] },
+      { v: 300, p: 0.18, s: [230, 300] },
+      { v: 500, p: 0.10, s: [290, 360] }
+    ];
+    this.setArena = (el) => { this.arena = el; };
+    this.setMe = (el) => { this.meEl = el; };
+    this.onKeyDown = (e) => {
+      const k = e.key;
+      // popups (rules / result) answer to the mouse only: swallow Space/Enter so a stray key
+      // (or a still-held jump) can't restart the game or press a focused button
+      if (this.state.intro || this.state.over) {
+        if (k === ' ' || k === 'Spacebar' || k === 'Enter' || k === 'ArrowUp') e.preventDefault();
+        this.keys.left = false; this.keys.right = false;
+        return;
+      }
+      if (k === 'ArrowLeft' || k === 'a' || k === 'ф') { this.keys.left = true; this.lastDir = -1; e.preventDefault(); }
+      else if (k === 'ArrowRight' || k === 'd' || k === 'в') { this.keys.right = true; this.lastDir = 1; e.preventDefault(); }
+      else if (k === 'Escape') { if (this.state.running) { e.preventDefault(); this.finish(); } else if (this.state.intro) { e.preventDefault(); this.cancelIntro(); } }
+      else if (k === ' ' || k === 'ArrowUp' || k === 'Spacebar') {
+        if (e.target && e.target.tagName === 'BUTTON' && !this.state.running) return;
+        e.preventDefault();
+        if (this.state.running) this.doJump(); else if (this.state.dialog) this.endDialog(true); else if (this.state.intro) this.startDialog(this.state.level); else if (this.state.over) this.startGame(this.state.level); else this.play();
+      }
+    };
+    this.onKeyUp = (e) => {
+      const k = e.key;
+      if ((this.state.intro || this.state.over) && (k === ' ' || k === 'Spacebar' || k === 'Enter')) e.preventDefault();
+      if (k === 'ArrowLeft' || k === 'a' || k === 'ф') this.keys.left = false;
+      if (k === 'ArrowRight' || k === 'd' || k === 'в') this.keys.right = false;
+    };
+    this.onBlur = () => { this.keys.left = false; this.keys.right = false; };
+    this.leftDown = (e) => { this.keys.left = true; this.lastDir = -1; if (e.cancelable) e.preventDefault(); };
+    this.leftUp = () => { this.keys.left = false; };
+    this.rightDown = (e) => { this.keys.right = true; this.lastDir = 1; if (e.cancelable) e.preventDefault(); };
+    this.rightUp = () => { this.keys.right = false; };
+    this.jumpTap = (e) => { this.doJump(); if (e.cancelable) e.preventDefault(); };
+    // touch: hold & drag = I follow your finger; a quick tap (or a second finger) = jump
+    this.touchX = null;
+    this.tStart = (e) => {
+      if (!this.state.running) return;
+      if (e.target && e.target.closest && e.target.closest('button, a')) return;
+      const t = e.changedTouches && e.changedTouches[0]; if (!t) return;
+      if (e.touches && e.touches.length > 1) { this.doJump(); return; }
+      const r = this.arena.getBoundingClientRect();
+      this.touchX = t.clientX - r.left;
+      this.tap = { x: t.clientX, y: t.clientY, at: Date.now(), moved: false };
+    };
+    this.tMove = (e) => {
+      if (!this.state.running || this.touchX == null) return;
+      const t = e.touches && e.touches[0]; if (!t) return;
+      const r = this.arena.getBoundingClientRect();
+      this.touchX = t.clientX - r.left;
+      if (this.tap && Math.hypot(t.clientX - this.tap.x, t.clientY - this.tap.y) > 12) this.tap.moved = true;
+    };
+    this.tEnd = (e) => {
+      if (e.touches && e.touches.length > 0) return;
+      if (this.state.running && this.tap && !this.tap.moved && Date.now() - this.tap.at < 250) this.doJump();
+      this.touchX = null; this.tap = null;
+    };
+    this.setMusic = (el) => { this.music = el; };
+    this.toggleMute = () => {
+      const m = !this.state.muted;
+      this.setState({ muted: m });
+      try { window.localStorage.setItem('coming-soon-muted', m ? '1' : '0'); } catch (err) {}
+      if (!m) { this.audio(); setTimeout(() => this.sfx('click'), 0); if (this.state.running) this.musicPlay(false); }
+      else this.musicStop(true);
+      if (this.state.running && this.arena) { try { this.arena.focus({ preventScroll: true }); } catch (err) {} }
+    };
+    this.start1 = () => this.startGame(1);
+    // rules popup before Hard, and before any game at night (noise meter)
+    // rules popup before every game (Easy: edge plants, Hard: moving plants, night: noise)
+    this.play = () => this.showIntro(this.state.level);
+    this.pickEasy = () => this.setState({ level: 1 });
+    this.pickHard = () => this.setState({ level: 2 });
+    this.menu = () => { this.px = null; this.setState({ over: false, failed: false, px: null, jump: 0 }); };
+    this.start2 = () => this.showIntro(2);
+    this.go2 = () => this.startDialog(this.state.level);
+    this.lines = {
+      day: { text: 'Money doesn’t fall from the sky!', ava: 'assets/wife.png' },
+      sunset: { text: 'Babe, enough work — let’s go have dinner!', ava: 'assets/wife.png' },
+      night: { text: 'Zzzzz...', ava: 'assets/wife-sleeping.png' }
+    };
+    this.dialogLine = this.lines.day.text; this.dialogAva = this.lines.day.ava;
+    // default follows local time; a click overrides it for this visit only
+    const pick = (v) => () => { if (this.state.running) return; this.setState({ themePick: v }); };
+    this.pickDay = pick('day'); this.pickSunset = pick('sunset'); this.pickNight = pick('night');
+    this.cancelIntro = () => this.setState({ intro: false });
+    this.restart = () => this.startGame(this.state.level);
+    this.finish = () => { this.endReq = true; if (!this.raf && this.state.running) this.raf = requestAnimationFrame(this.tick); };
+    this.other = () => { const L = this.state.level === 1 ? 2 : 1; if (L === 2 || this.palette().isNight) this.showIntro(L); else this.showIntro(1); };
+    this.tick = (t) => this.step(t);
+  }
+  componentDidMount() {
+    try { if (window.localStorage.getItem('coming-soon-muted') === '1') this.setState({ muted: true }); } catch (err) {}
+    this.setState({ tod: this.timeOfDay(), clockText: this.clockNow() });
+    this.clock = setInterval(() => {
+      const c = this.clockNow(), t = this.timeOfDay();
+      if (c !== this.state.clockText || t !== this.state.tod) this.setState({ clockText: c, tod: t });
+    }, 1000);
+    try {
+      const b1 = parseInt(window.localStorage.getItem('coming-soon-best') || '0', 10) || 0;
+      const b2 = parseInt(window.localStorage.getItem('coming-soon-best-2') || '0', 10) || 0;
+      if (b1 || b2) this.setState({ best1: b1, best2: b2 });
+    } catch (err) {}
+  }
+  componentWillUnmount() {
+    clearInterval(this.typeT); clearTimeout(this.dlgT); if (this.raf) cancelAnimationFrame(this.raf); if (this.clock) clearInterval(this.clock); this.musicStop(true); }
+  // --- background music during a shift (respects the sound toggle) ---
+  musicPlay(fromStart) {
+    const m = this.music; if (!m || this.state.muted) return;
+    if (this.nightMode) return; // night shift: no music, my wife is asleep
+    if (this.fadeT) { clearInterval(this.fadeT); this.fadeT = null; }
+    try { if (fromStart) m.currentTime = 0; m.volume = 0.32; const p = m.play(); if (p && p.catch) p.catch(() => {}); } catch (err) {}
+  }
+  musicStop(now) {
+    const m = this.music; if (!m) return;
+    if (this.fadeT) { clearInterval(this.fadeT); this.fadeT = null; }
+    if (now) { try { m.pause(); } catch (err) {} return; }
+    this.fadeT = setInterval(() => {
+      try {
+        m.volume = Math.max(0, m.volume - 0.04);
+        if (m.volume <= 0.01) { m.pause(); clearInterval(this.fadeT); this.fadeT = null; }
+      } catch (err) { clearInterval(this.fadeT); this.fadeT = null; }
+    }, 40);
+  }
+  // day / night by the viewer's local time (sunset slot reserved for the upcoming design)
+  // result amount font: pixel faces with clearer digits than Pixelify Sans
+  amountType() {
+    const f = this.props.amountFont ?? 'Silkscreen';
+    const map = {
+      'Silkscreen': ["'Silkscreen', monospace", 700, 44],
+      'Press Start 2P': ["'Press Start 2P', monospace", 400, 30],
+      'VT323': ["'VT323', monospace", 400, 64],
+      'Pixelify Sans': ["'Pixelify Sans', monospace", 700, 48],
+      'Inter': ["'Inter', sans-serif", 600, 46]
+    };
+    const m = map[f] || map['Silkscreen'];
+    return { amountFont: m[0], amountWeight: m[1], amountSize: m[2] };
+  }
+  clockNow() {
+    const d = new Date();
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  timeOfDay() {
+    const h = new Date().getHours();
+    if (h >= 21 || h < 6) return 'night';
+    if (h >= 18) return 'sunset';
+    return 'day';
+  }
+  // popup cards: dark at night, light otherwise
+  cardColors() {
+    if (this.palette().isNight) return {
+      cBg: '#1E1745', cBorder: 'rgba(224,187,84,.28)', cInk: '#E0BB54', cOnInk: '#1A1240', cHover: '#ECCB72',
+      cSoft: 'rgba(224,187,84,.14)', cSub: '#B8B2D8', cPanel: '#2A2259', cDanger: '#FF7A92'
+    };
+    return {
+      cBg: '#F4F6FB', cBorder: 'transparent', cInk: '#454A8C', cOnInk: '#FFFFFF', cHover: '#363B78',
+      cSoft: 'rgba(69,74,140,.1)', cSub: '#5C618F', cPanel: '#E6EAF5', cDanger: '#C2334F'
+    };
+  }
+  // which time of day to show: the visitor's switch wins, then the Tweaks setting, then local time
+  themeName() {
+    const pickd = this.state.themePick;
+    if (pickd && pickd !== 'auto') return pickd;
+    const t = this.props.theme ?? 'auto';
+    if (t !== 'auto') return t;
+    return this.state.tod || this.timeOfDay();
+  }
+  palette() {
+    const t = this.themeName();
+    if (t === 'night') return {
+      isNight: true,
+      bg: '#221A46', bgClass: 'bg-night',
+      ink: '#E0BB54', onInk: '#1A1240', inkHover: '#ECCB72', inkSoft: 'rgba(224,187,84,.16)', sub: '#C4A75F', shadow: 'rgba(14,6,44,.45)',
+      titleColor: '#E0BB54', titleStroke: '#E0BB54', titleBg: 'none', subtitleColor: '#E0BB54'
+    };
+    if (t === 'sunset') return {
+      isNight: false,
+      bg: '#B5A3E4', bgClass: 'bg-sunset',
+      ink: '#F6DCD8', onInk: '#5A4A9C', inkHover: '#FBE7C9', inkSoft: 'rgba(246,220,216,.22)', sub: '#F3D6D6', shadow: '#815A85',
+      titleColor: 'transparent', titleStroke: 'transparent', titleBg: 'linear-gradient(180deg, #EDD1EF 12%, #F3D6D6 50%, #FBE0B5 88%)',
+      subtitleColor: '#F6DCD8'
+    };
+    return {
+      isNight: false,
+      bg: '#BFD0F2', bgClass: 'bg-day',
+      ink: '#454A8C', onInk: '#FFFFFF', inkHover: '#363B78', inkSoft: 'rgba(69,74,140,.1)', sub: '#6A70A6', shadow: '#B3C0DE',
+      titleColor: '#454A8C', titleStroke: '#454A8C', titleBg: 'none', subtitleColor: '#454A8C'
+    };
+  }
+  roundMs() { return (parseInt(this.props.roundSeconds ?? '30', 10) || 30) * 1000; }
+  meW() { return this.meEl ? this.meEl.offsetWidth : 340; }
+  meH() { return this.meEl ? this.meEl.offsetHeight : 348; }
+  doJump() {
+    if (this.jump > 0.5) return;
+    this.vy = 1450; this.jump = 1;
+    this.sfx('jump');
+  }
+  // --- tiny chiptune sound engine (Web Audio, no files) ---
+  audio() {
+    if (!this.actx) {
+      const C = window.AudioContext || window.webkitAudioContext;
+      if (!C) return null;
+      try { this.actx = new C(); } catch (err) { return null; }
+    }
+    if (this.actx.state === 'suspended') { try { this.actx.resume(); } catch (err) {} }
+    return this.actx;
+  }
+  tone(a, f, at, dur, type, vol, slideTo) {
+    const o = a.createOscillator(), g = a.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, at);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, at + dur);
+    g.gain.setValueAtTime(0.0001, at);
+    g.gain.exponentialRampToValueAtTime(vol, at + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, at + dur);
+    o.connect(g); g.connect(a.destination);
+    o.start(at); o.stop(at + dur + 0.02);
+  }
+  sfx(name, v) {
+    if (this.state.muted) return;
+    const a = this.audio(); if (!a) return;
+    const t = a.currentTime + 0.01;
+    if (name === 'coin') {
+      const f = { 50: 660, 100: 784, 300: 988, 500: 1175 }[v] || 784;
+      this.tone(a, f, t, 0.07, 'square', 0.06);
+      this.tone(a, f * 1.5, t + 0.07, 0.14, 'square', 0.06);
+      if (v >= 500) this.tone(a, f * 2, t + 0.16, 0.16, 'square', 0.05);
+    } else if (name === 'jump') {
+      this.tone(a, 280, t, 0.16, 'square', 0.05, 640);
+    } else if (name === 'strike') {
+      this.tone(a, 240, t, 0.18, 'sawtooth', 0.07, 160);
+      this.tone(a, 240, t + 0.2, 0.22, 'sawtooth', 0.07, 140);
+    } else if (name === 'fail') {
+      [440, 349, 262, 196].forEach((f, i) => this.tone(a, f, t + i * 0.15, 0.17, 'triangle', 0.12));
+    } else if (name === 'end') {
+      [523, 659, 784, 1047].forEach((f, i) => this.tone(a, f, t + i * 0.1, 0.14, 'square', 0.05));
+    } else if (name === 'start') {
+      this.tone(a, 392, t, 0.08, 'square', 0.05);
+      this.tone(a, 523, t + 0.09, 0.12, 'square', 0.05);
+    } else if (name === 'thud') {
+      this.tone(a, 120, t, 0.12, 'triangle', 0.14, 60);
+    } else if (name === 'click') {
+      this.tone(a, 880, t, 0.05, 'square', 0.035);
+    }
+  }
+  showIntro(level) {
+    this.setState({ intro: true, over: false, level: level === 2 ? 2 : (level === 1 ? 1 : this.state.level) });
+    if (this.arena && this.arena.focus) { try { this.arena.focus({ preventScroll: true }); } catch (err) {} }
+  }
+  // the plants already standing in the scene come to life: each walks toward the other side
+  sceneObstacles() {
+    const out = [];
+    if (!this.arena) return out;
+    const a = this.arena.getBoundingClientRect();
+    const W = a.width;
+    // the floor starts moving: all three ride off to the right together, the last one gone in ~1.8 s
+    const els = [[this.plantEls[0], this.plants[0], 1, 300], [this.plantEls[1], this.plants[1], 1, 300], [this.plantEls[2], this.plants[2], 1, 300]];
+    let minLeft = W;
+    for (const [el] of els) { if (el) { const r0 = el.getBoundingClientRect(); if (r0.width) minLeft = Math.min(minLeft, r0.left - a.left); } }
+    const sp = Math.max(300, (W - minLeft + 20) / 1.8);
+    for (const [el, pl, dirn, wait] of els) {
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (!r.width) continue;
+      out.push({ id: this.nextId++, src: pl.src, h: Math.round(r.height), w: Math.round(r.width), x: r.left - a.left, b: Math.round(a.bottom - r.bottom), vx: dirn * sp, flip: 1, wait, harmless: true });
+    }
+    return out;
+  }
+  // wife's speech bubble pops out of the monitor, types its line, then the shift starts
+  startDialog(level) {
+    level = level === 2 ? 2 : 1;
+    this.nightMode = !!this.palette().isNight;
+    this.audio(); this.musicPlay(true); // inside the click, so browsers allow the audio
+    clearInterval(this.typeT); clearTimeout(this.dlgT);
+    this.setState({ intro: false, over: false, dialog: true, dialogN: 0, dialogOut: false, level });
+    if (this.arena && this.arena.focus) { try { this.arena.focus({ preventScroll: true }); } catch (err) {} }
+    const L = this.lines[this.themeName()] || this.lines.day;
+    this.dialogLine = L.text; this.dialogAva = L.ava;
+    const line = this.dialogLine;
+    this.typeT = setInterval(() => {
+      const n = (this.state.dialogN || 0) + 1;
+      if (n % 2 === 0 && line[n - 1] !== ' ') this.sfx('click');
+      this.setState({ dialogN: n });
+      if (n >= line.length) { clearInterval(this.typeT); this.dlgT = setTimeout(() => this.endDialog(false), 1500); }
+    }, 38);
+  }
+  endDialog(skip) {
+    if (!this.state.dialog || this.state.dialogOut) return;
+    clearInterval(this.typeT); clearTimeout(this.dlgT);
+    this.setState({ dialogOut: true, dialogN: this.dialogLine.length });
+    this.dlgT = setTimeout(() => { this.setState({ dialog: false, dialogOut: false }); this.startGame(this.state.level); }, skip ? 120 : 260);
+  }
+  startGame(level) {
+    level = level === 2 ? 2 : 1;
+    this.obsAcc = 0; this.nextObs = 4200; this.endReq = false;
+    const startObs = []; // scene plants simply disappear on Hard
+    if (this.raf) cancelAnimationFrame(this.raf);
+    const W = this.arena ? this.arena.clientWidth : 1400;
+    this.px = W / 2;
+    this.jump = 0; this.vy = 0; this.keys.left = false; this.keys.right = false; this.lastDir = 0; this.touchX = null; this.tap = null;
+    this.startT = null; this.last = null; this.acc = 400;
+    this.nightMode = !!this.palette().isNight;
+    this.speedMul = this.themeName() === 'sunset' ? 2 : 1; // sunset: cash falls 2× faster
+    this.noise = 0; this.strikes = 0; this.inDanger = false; this.redUntil = 0;
+    // Easy: the plants standing at the edges are hazards — one touch = fail
+    this.hits = 0; this.invulnUntil = 0; this.edgeHazards = [];
+    if (level === 1 && this.arena) {
+      const a = this.arena.getBoundingClientRect();
+      for (const el of this.plantEls) {
+        if (!el) continue;
+        const r = el.getBoundingClientRect();
+        if (!r.width) continue;
+        this.edgeHazards.push({ l: r.left - a.left + r.width * 0.22, r: r.right - a.left - r.width * 0.22, h: r.height, c: (r.left + r.right) / 2 - a.left });
+      }
+    }
+    this.sfx('start');
+    if (!(this.music && !this.music.paused)) this.musicPlay(true);
+    this.setState({ running: true, over: false, intro: false, failed: false, failReason: null, nightMode: this.nightMode, noise: 0, strikes: 0, inDanger: false, hits: 0, blink: 0, level, score: 0, caught: 0, missed: 0, bills: [], pops: [], obs: startObs, timeLeft: this.roundMs(), px: this.px, jump: 0 });
+    if (this.arena && this.arena.focus) { try { this.arena.focus({ preventScroll: true }); } catch (err) { this.arena.focus(); } }
+    this.raf = requestAnimationFrame(this.tick);
+  }
+  pickType() {
+    let r = Math.random();
+    for (const t of this.types) { if (r < t.p) return t; r -= t.p; }
+    return this.types[0];
+  }
+  step(t) {
+    if (!this.state.running) { this.raf = null; return; }
+    if (this.startT == null) { this.startT = t; this.last = t; }
+    const dt = Math.min(50, t - this.last); this.last = t;
+    const sec = dt / 1000;
+    const W = this.arena ? this.arena.clientWidth : 1400;
+    const H = this.arena ? this.arena.clientHeight : 900;
+    const total = this.roundMs();
+    const elapsed = t - this.startT;
+    const timeLeft = Math.max(0, total - elapsed);
+    const prog = Math.min(1, elapsed / total);
+    let { score, caught, missed } = this.state;
+    const bills = this.state.bills.slice();
+    let pops = this.state.pops.slice();
+
+    // player
+    const mw = this.meW(), mh = this.meH();
+    const speed = Math.max(420, W * 0.55);
+    // both held (or a key-up got lost): the most recently pressed direction wins, so you never get stuck
+    let dir = (this.keys.right ? 1 : 0) - (this.keys.left ? 1 : 0);
+    // finger held on screen: glide toward it (a bit faster than the keys so it feels direct)
+    let touchStep = null;
+    if (this.touchX != null) {
+      const diff = this.touchX - this.px;
+      touchStep = Math.sign(diff) * Math.min(Math.abs(diff), speed * 1.6 * sec);
+    }
+    if (this.keys.left && this.keys.right) dir = this.lastDir || 0;
+    const minX = Math.min(W / 2, mw * 0.42), maxX = Math.max(W / 2, W - mw * 0.42);
+    if (!isFinite(this.px)) this.px = W / 2;
+    const stepX = touchStep != null ? touchStep : dir * speed * sec;
+    this.px = Math.min(maxX, Math.max(minX, this.px + stepX));
+    if (this.jump > 0 || this.vy > 0) {
+      this.jump += this.vy * sec;
+      this.vy -= 3400 * sec;
+      if (this.jump <= 0) {
+        this.jump = 0; this.vy = 0;
+        // the noise comes from the landing thud, not the take-off
+        if (this.nightMode) { this.noise = Math.min(100, this.noise + 30); this.sfx('thud'); }
+      }
+    }
+
+    let edgeFail = false;
+    if (this.edgeHazards && this.edgeHazards.length && t >= this.invulnUntil) {
+      const hl = this.px - mw * 0.18, hr = this.px + mw * 0.18;
+      for (const z of this.edgeHazards) {
+        if (hl < z.r && hr > z.l && this.jump < z.h * 0.7) { edgeFail = true; break; } // one touch = fail, like Hard
+      }
+    }
+
+    // night: every jump adds noise, it fades over time; 3 trips into the red zone = fail
+    let failReason = null;
+    if (this.nightMode) {
+      this.noise = Math.max(0, this.noise - 14 * sec);
+      // each trip into the red = one strike; the meter is then knocked back to 45%,
+      // so the next strike needs a fresh climb (no more waiting for it to drain)
+      if (this.noise >= 75) {
+        this.strikes += 1; this.sfx('strike');
+        this.noise = 45; this.redUntil = t + 450;
+        pops.push({ id: this.nextId++, v: 0, label: 'SHHH!', x0: this.px - 40, y0: H - mh - 40 - this.jump, born: t });
+      }
+      this.inDanger = t < (this.redUntil || 0);
+    }
+
+    // spawn
+    this.acc += dt;
+    const interval = 700 - 340 * prog;
+    while (this.acc >= interval && timeLeft > 0) {
+      this.acc -= interval;
+      const ty = this.pickType();
+      const v = (ty.s[0] + Math.random() * (ty.s[1] - ty.s[0])) * (1 + 0.35 * prog) * Math.max(0.8, H / 900) * (this.speedMul || 1);
+      const bx = 20 + Math.random() * Math.max(10, W - 140);
+      bills.push({ id: this.nextId++, v: ty.v, bx, x: bx, y: -56, vy: v, ph: Math.random() * 6.28, sway: 10 + Math.random() * 20, rot: 0 });
+    }
+
+    // catch zone: monitor, head and desk top
+    const hl = this.px - mw * 0.4, hr = this.px + mw * 0.4;
+    const top = H - 6 - mh - this.jump;
+    const bottom = top + mh * 0.6;
+    const keep = [];
+    for (const b of bills) {
+      b.y += b.vy * sec;
+      b.ph += dt / 300;
+      b.x = b.bx + Math.sin(b.ph) * b.sway;
+      b.rot = Math.round(Math.sin(b.ph) * 8);
+      const bw = W < 760 ? 56 : 100, bh = W < 760 ? 28 : 46; // bills are half-size on phones
+      const hit = b.x < hr && b.x + bw > hl && b.y + bh > top + 6 && b.y < bottom;
+      if (hit) {
+        score += b.v; caught += 1;
+        pops.push({ id: b.id, v: b.v, x0: b.x + 10, y0: b.y - 10, born: t });
+        this.sfx('coin', b.v);
+        continue;
+      }
+      if (b.y > H - 30) { missed += 1; continue; }
+      keep.push(b);
+    }
+    pops = pops.filter((p) => t - p.born < 800);
+
+    // level 2: plants slide along the floor — jump over them
+    const level = this.state.level;
+    let obs = this.state.obs;
+    let failed = false;
+    if (level === 2) {
+      obs = obs.slice();
+      const scale = W < 760 ? 0.6 : 1;
+      this.obsAcc += dt;
+      if (this.obsAcc >= this.nextObs && timeLeft > 1200) {
+        this.obsAcc = 0;
+        this.nextObs = ((2600 - 1100 * prog) + Math.random() * 1000) * (this.nightMode ? 1.35 : 1);
+        const pl = this.plants[Math.floor(Math.random() * this.plants.length)];
+        const fromLeft = true; // the floor is a conveyor moving right
+        const oh = Math.round(pl.h * scale);
+        const w = Math.round(oh * pl.ratio);
+        const sp = (290 + Math.random() * 80) * (1 + 0.25 * prog) * Math.max(0.75, W / 1400);
+        obs.push({ id: this.nextId++, src: pl.src, h: oh, w, b: 6, x: fromLeft ? -w - 10 : W + 10, vx: fromLeft ? sp : -sp, flip: 1, wait: 0 });
+      }
+      const pl = this.px - mw * 0.18, pr = this.px + mw * 0.18;
+      const nextObs = [];
+      for (const o of obs) {
+        if (o.wait > 0) { o.wait -= dt; nextObs.push(o); continue; }
+        if (o.b > 6) o.b = Math.max(6, o.b - 160 * sec);
+        o.x += o.vx * sec;
+        if (o.x < -o.w - 40 || o.x > W + 40) continue;
+        const ol = o.x + o.w * 0.25, orr = o.x + o.w * 0.75;
+        if (!o.harmless && ol < pr && orr > pl && this.jump < o.h * 0.7) { failed = true; failReason = 'plant'; }
+        nextObs.push(o);
+      }
+      obs = nextObs;
+    }
+
+    if (!failed && this.nightMode && this.strikes >= 3) { failed = true; failReason = 'noise'; }
+    if (!failed && edgeFail) { failed = true; failReason = 'edge'; }
+    if (timeLeft <= 0 || failed || this.endReq) {
+      this.sfx(failed ? 'fail' : 'end');
+      this.musicStop(false);
+      this.endReq = false;
+      const key = level === 2 ? 'best2' : 'best1';
+      let best = this.state[key];
+      if (score > best) { best = score; try { window.localStorage.setItem(level === 2 ? 'coming-soon-best-2' : 'coming-soon-best', String(best)); } catch (err) {} }
+      this.raf = null; this.jump = 0; this.vy = 0;
+      this.setState({ running: false, over: true, failed, failReason, score, caught, missed, bills: [], pops: [], obs: [], timeLeft: 0, [key]: best, px: this.px, jump: 0 });
+      return;
+    }
+    this.setState({ bills: keep, pops, obs, score, caught, missed, timeLeft, noise: Math.round(this.noise), strikes: this.strikes, hits: this.hits, blink: t < this.invulnUntil ? (Math.floor(t / 100) % 2) : 0, inDanger: this.inDanger, px: Math.round(this.px), jump: Math.round(this.jump) });
+    this.raf = requestAnimationFrame(this.tick);
+  }
+  fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  renderVals() {
+    const s = this.state;
+    const secs = s.running ? Math.ceil(s.timeLeft / 1000) : (s.over ? 0 : this.roundMs() / 1000);
+    const now = (typeof performance !== 'undefined') ? performance.now() : 0;
+    let verdict = 'Not bad for a start!';
+    if (s.score >= 4000) verdict = 'You’re hired. Seriously.';
+    else if (s.score >= 2500) verdict = 'Now that’s productivity!';
+    else if (s.score >= 1200) verdict = 'That’s a new monitor right there.';
+    else if (s.score === 0) verdict = 'Every bill flew right past.';
+    // character follows the game only while playing (and under the result popup); main screen = always centred
+    const placed = s.px != null && (s.running || s.over);
+    return {
+      ...this.amountType(),
+      introHard: s.level === 2,
+      introNightOnly: s.level !== 2,
+      isSunset: this.themeName() === 'sunset',
+      easyTitle: this.palette().isNight ? 'Mind the plants & don’t wake my wife!' : 'Mind the plants!',
+      hardTitle: this.palette().isNight ? 'Don’t wreck the plants & don’t wake my wife!' : 'Don’t wreck the plants!',
+      meOpacity: s.running && s.blink ? 0.35 : 1,
+      nightMode: !!s.nightMode && s.running,
+      noisePct: s.inDanger ? 100 : Math.round(s.noise || 0),
+      noiseColor: s.inDanger ? '#FF5C78' : ((s.noise || 0) > 55 ? '#FF9F43' : 'var(--ink)'),
+      strike1: (s.strikes || 0) >= 1 ? '#FF6B86' : 'transparent',
+      strike2: (s.strikes || 0) >= 2 ? '#FF6B86' : 'transparent',
+      strike3: (s.strikes || 0) >= 3 ? '#FF6B86' : 'transparent',
+      failPlant: s.over && s.failed && s.failReason === 'plant',
+      failEdge: s.over && s.failed && s.failReason === 'edge',
+      failNoise: s.over && s.failed && s.failReason === 'noise',
+      failTitle: s.failReason === 'noise' ? 'You woke up my wife!' : 'Fail!',
+      muted: !!s.muted, soundOn: !s.muted, mutedStr: s.muted ? 'true' : 'false',
+      muteText: s.muted ? 'Sound Off' : 'Sound On', muteLabel: s.muted ? 'Turn sound on' : 'Turn sound off',
+      toggleMute: this.toggleMute, setMusic: this.setMusic,
+      ...this.palette(),
+      ...this.cardColors(),
+      bgDay: this.palette().bgClass === 'bg-day', bgSunset: this.palette().bgClass === 'bg-sunset', bgNight: this.palette().bgClass === 'bg-night',
+      clockText: this.state.clockText || this.clockNow(),
+      roundSec: this.roundMs() / 1000,
+      running: s.running,
+      over: s.over,
+      showStart: !s.running && !s.over && !s.intro && !s.dialog,
+      dialog: !!s.dialog,
+      bubbleClass: s.dialogOut ? 'bubble out' : 'bubble',
+      avatarSrc: this.dialogAva,
+      ...(() => { const cur = this.themeName(); const o = {}; for (const [k, n] of [['day', 'Day'], ['sunset', 'Sunset'], ['night', 'Night']]) { o['t' + n + 'Cls'] = cur === k ? 'tbtn on' : 'tbtn'; o['t' + n + 'On'] = cur === k ? 'true' : 'false'; } return o; })(),
+      pickDay: this.pickDay, pickSunset: this.pickSunset, pickNight: this.pickNight,
+      dialogShown: this.dialogLine.slice(0, s.dialogN || 0),
+      dialogRest: this.dialogLine.slice(s.dialogN || 0),
+      bubbleName: this.palette().isNight ? '#E0BB54' : '#1B1630',
+      easyClass: s.level === 1 ? 'seg-btn on' : 'seg-btn', hardClass: s.level === 2 ? 'seg-btn on' : 'seg-btn',
+      easyOn: s.level === 1 ? 'true' : 'false', hardOn: s.level === 2 ? 'true' : 'false',
+      lvlName: s.level === 2 ? 'HARD' : 'EASY', lvlLower: s.level === 2 ? 'Hard' : 'Easy',
+      intro: !!s.intro && !s.running,
+      sceneClass: s.running ? 'scene playing' : 'scene',
+      scoreText: this.fmt(s.score),
+      bestText: this.fmt(s.level === 2 ? s.best2 : s.best1),
+      level: s.level,
+      failed: s.over && s.failed,
+      won: s.over && !s.failed,
+      otherLabel: s.level === 1 ? 'Level 2 →' : '← Level 1',
+      obs: s.obs.map((o) => ({ id: o.id, src: o.src, h: o.h, b: Math.round(o.b ?? 6), x: Math.round(o.x), flip: o.flip })),
+      decorVis: (s.running && s.level === 2) ? 'hidden' : 'visible',
+      setP0: this.setP0, setP1: this.setP1, setP2: this.setP2,
+      verdict,
+      timeText: Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0'),
+      meLeft: placed ? s.px + 'px' : '50%',
+      meTx: '-50%',
+      meTy: -(s.jump || 0),
+      shTx: '-50%',
+      shScale: Math.max(0.45, 1 - (s.jump || 0) / 260).toFixed(2),
+      bills: s.bills.map((b) => ({ id: b.id, v: b.v, x: Math.round(b.x), y: Math.round(b.y), rot: b.rot })),
+      pops: s.pops.map((p) => { const a = Math.min(1, (now - p.born) / 800); return { v: p.v, label: p.label || ('+$' + p.v), x: Math.round(p.x0), y: Math.round(p.y0 - 50 * a), o: (1 - a).toFixed(2) }; }),
+      setArena: this.setArena, setMe: this.setMe,
+      onKeyDown: this.onKeyDown, onKeyUp: this.onKeyUp, onBlur: this.onBlur,
+      leftDown: this.leftDown, leftUp: this.leftUp, rightDown: this.rightDown, rightUp: this.rightUp, jumpTap: this.jumpTap,
+      start1: this.start1, start2: this.start2, restart: this.restart, other: this.other, finish: this.finish, play: this.play, pickEasy: this.pickEasy, pickHard: this.pickHard, menu: this.menu, go2: this.go2, cancelIntro: this.cancelIntro
+    };
+  }
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(Component, {"theme": "auto", "amountFont": "Press Start 2P", "roundSeconds": "30"}));
+</script>
+</body>
+</html>
