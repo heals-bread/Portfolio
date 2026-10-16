@@ -509,7 +509,7 @@ class Component extends DCLogic {
     this.pickDay = pick('day'); this.pickSunset = pick('sunset'); this.pickNight = pick('night');
     this.cancelIntro = () => this.setState({ intro: false });
     this.restart = () => this.startGame(this.state.level);
-    this.finish = () => { this.endReq = true; if (!this.raf && this.state.running) this.raf = requestAnimationFrame(this.tick); };
+    this.finish = () => { this.endReq = true; if (!this.raf && this.isRunning) this.raf = requestAnimationFrame(this.tick); };
     this.other = () => { const L = this.state.level === 1 ? 2 : 1; if (L === 2 || this.palette().isNight) this.showIntro(L); else this.showIntro(1); };
     this.tick = (t) => this.step(t);
   }
@@ -718,6 +718,7 @@ class Component extends DCLogic {
     this.obsAcc = 0; this.nextObs = 4200; this.endReq = false;
     const startObs = []; // scene plants simply disappear on Hard
     if (this.raf) cancelAnimationFrame(this.raf);
+    this.isRunning = true;
     const W = this.arena ? this.arena.clientWidth : 1400;
     this.px = W / 2;
     this.jump = 0; this.vy = 0; this.keys.left = false; this.keys.right = false; this.lastDir = 0; this.touchX = null; this.tap = null;
@@ -748,7 +749,10 @@ class Component extends DCLogic {
     return this.types[0];
   }
   step(t) {
-    if (!this.state.running) { this.raf = null; return; }
+    // the loop is driven by an instance flag: React may commit {running: true} a frame later
+    // (e.g. when the shift starts from a timer after the wife's bubble), so wait for it instead of quitting
+    if (!this.isRunning) { this.raf = null; return; }
+    if (!this.state.running) { this.raf = requestAnimationFrame(this.tick); return; }
     if (this.startT == null) { this.startT = t; this.last = t; }
     const dt = Math.min(50, t - this.last); this.last = t;
     const sec = dt / 1000;
@@ -885,7 +889,7 @@ class Component extends DCLogic {
       const key = level === 2 ? 'best2' : 'best1';
       let best = this.state[key];
       if (score > best) { best = score; try { window.localStorage.setItem(level === 2 ? 'coming-soon-best-2' : 'coming-soon-best', String(best)); } catch (err) {} }
-      this.raf = null; this.jump = 0; this.vy = 0;
+      this.raf = null; this.isRunning = false; this.jump = 0; this.vy = 0;
       this.setState({ running: false, over: true, failed, failReason, score, caught, missed, bills: [], pops: [], obs: [], timeLeft: 0, [key]: best, px: this.px, jump: 0 });
       return;
     }
