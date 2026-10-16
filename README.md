@@ -10,6 +10,4 @@ Static page, no build step. Open `index.html` or deploy the whole folder as-is
 Fonts load from Google Fonts. Theme (day / sunset / night) follows the visitor's local time
 and can be switched with the buttons next to "Sound On".
 
-After deploying, open `index.html` and replace the two `assets/og-image.png` values in the
-`og:image` / `twitter:image` meta tags with the full URL (https://your-domain/assets/og-image.png)
-so link previews show the picture everywhere.
+Live at https://aleksandrskvortsov.vercel.app — link-preview tags (og:image etc.) already point there.
