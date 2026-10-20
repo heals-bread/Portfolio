@@ -47,7 +47,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .scene{letter-spacing:-0.03em}
 .bubble-name,.bubble-text,.mute-text,.clock,.bill,.pop,.lvl,.rc-title,.rc-lead,.rc-amount,.ic-title,.ic-rush b,.key,.ic-keylabel,.ic-noise-label,.kbd,.hud{letter-spacing:normal}
 /* Press Start 2P has a full-width space: tighten word gaps so they don't read as double spaces */
-.rc-lead,.rc-amount,.rc-title,.ic-title,.ic-rush b,.hud,.bubble-text,.ic-noise-label{word-spacing:-0.5em}
+.rc-lead,.rc-amount,.rc-title,.ic-title,.ic-rush b,.hud,.bubble-text,.ic-noise-label{word-spacing:-0.35em}
 /* textured pixel gradients: Bayer-dithered strips, each pixel shown as a crisp 4px block */
 .bgtex{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background-repeat:repeat-x;background-size:32px 100%;image-rendering:pixelated}
 .bg-day{background-image:url(assets/bg-day.png)}
@@ -56,9 +56,17 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .topbar{width:100%;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;column-gap:max(24px,3vw);row-gap:clamp(12px,2.2vh,22px);position:relative;z-index:3}
 .toolbar{display:flex;align-items:center;gap:6px;justify-self:start;min-width:0}
 .title{margin-top:clamp(22px,3.4vh,40px) !important}
-.theme-seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--ink-soft)}
+.theme-seg{display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:var(--seg-bg)}
 .tbtn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:36px;padding:0 10px;border:0;border-radius:999px;background:transparent;color:var(--ink);font-family:'Google Sans Flex',sans-serif;font-weight:600;font-size:12px;letter-spacing:-0.03em;text-transform:uppercase;cursor:pointer}
-.tbtn:hover{background:var(--ink-soft)}
+.tbtn{box-sizing:border-box;width:36px;padding:0 !important;border:1.5px solid transparent !important;transition:background .15s,color .15s}
+.tbtn svg *{transition:fill .15s}
+/* selected time of day: its own little sky — gradient fill, reversed gradient rim, filled icon */
+.tbtn:not(.on):hover{background:var(--ink-soft)}
+.t-day{--h-top:#A6C1F8;--h-bot:#D8DFEC;--h-icon:#F2DB47}
+.t-sunset{--h-top:#F8D0A6;--h-bot:#C997CC;--h-icon:#B45674}
+.t-night{--h-top:#0B032E;--h-bot:#59507F;--h-icon:#F9DC8D}
+.tbtn.tbtn.on{color:var(--h-icon);background:linear-gradient(180deg,var(--h-top),var(--h-bot)) padding-box,linear-gradient(180deg,var(--h-bot),var(--h-top)) border-box}
+.t-day.on circle,.t-night.on path,.t-sunset.on path:first-child{fill:currentColor}
 .tbtn.on{background:var(--ink);color:var(--on-ink)}
 .tbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 .tbtn:disabled{opacity:.45;cursor:default}
@@ -132,7 +140,8 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .key{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;padding:0 8px;box-sizing:border-box;border:2px solid var(--ink);border-radius:6px;box-shadow:0 3px 0 var(--ink);font-family:'Press Start 2P',monospace;font-size:11px;color:var(--ink);background:var(--panel);vertical-align:middle}
 .key-sm{height:24px;font-size:9px;padding:0 6px;box-shadow:0 2px 0 var(--ink)}
 .key-wide{min-width:68px}
-.ic-keys{display:flex;align-items:center;justify-content:center;gap:8px}
+.ic-keys{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px}
+.ic-keyor{font-family:'Google Sans Flex',sans-serif;font-size:14px;color:var(--sub);margin:0 2px}
 .ic-keylabel{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--ink);margin:0 12px 0 4px}
 .ic-touch{margin:0;display:none;font-size:15px;color:var(--sub)}
 .ic-noise{display:flex;align-items:center;gap:10px}
@@ -147,6 +156,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .ic-btn-main{border:2px solid var(--ink);background:var(--ink);color:var(--on-ink)}
 .ic-btn-main:hover{background:var(--ink-hover);border-color:var(--ink-hover)}
 .ic-btn-ghost{border:2px solid var(--ink);background:transparent;color:var(--ink)}
+
 .ic-btn-ghost:hover{background:var(--ink-soft)}
 .ic-btn:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 @media (max-width:460px){.ic{padding:24px 20px 22px;gap:16px}.ic-title{font-size:18px}.ic-panel p{font-size:14px}.ic-tiles img{width:150px;height:63px}.ic-tile{width:104px;height:117px}.ic-bar{width:120px}}
@@ -178,7 +188,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 .scene{height:100svh;min-height:0 !important}
 .spacer{min-height:8px !important}
 .spot{width:min(300px,78vw) !important;filter:blur(12px) !important}
-.toolbar{gap:2px}.mute{padding:0 10px}.tbtn{min-width:32px;height:32px;padding:0 8px}
+.toolbar{gap:2px}.mute{padding:0 10px}.tbtn{min-width:32px;width:32px;height:32px;padding:0 8px}
 .mute-text{display:none}
 .clock{padding-right:4px}
 .clock-label{display:none}
@@ -202,7 +212,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 
 <!-- Page markup: {{holes}} are filled from renderVals(), <sc-if>/<sc-for> are conditionals and loops -->
 <template id="dc-template">
-<main class="{{sceneClass}}" ref="{{setArena}}" tabIndex="0" onKeyDown="{{onKeyDown}}" onKeyUp="{{onKeyUp}}" onBlur="{{onBlur}}" onTouchStart="{{tStart}}" onTouchMove="{{tMove}}" onTouchEnd="{{tEnd}}" onTouchCancel="{{tEnd}}" style="--ink: {{ink}}; --on-ink: {{onInk}}; --ink-hover: {{inkHover}}; --ink-soft: {{inkSoft}}; --sub: {{sub}}; position: relative; min-height: 100vh; overflow: hidden; box-sizing: border-box; background-color: {{bg}}; color: {{ink}}; font-family: 'Google Sans Flex', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 28px 28px 0">
+<main class="{{sceneClass}}" ref="{{setArena}}" tabIndex="0" onKeyDown="{{onKeyDown}}" onKeyUp="{{onKeyUp}}" onBlur="{{onBlur}}" onTouchStart="{{tStart}}" onTouchMove="{{tMove}}" onTouchEnd="{{tEnd}}" onTouchCancel="{{tEnd}}" style="--ink: {{ink}}; --on-ink: {{onInk}}; --ink-hover: {{inkHover}}; --ink-soft: {{inkSoft}}; --sub: {{sub}}; --seg-bg: {{segBg}}; position: relative; min-height: 100vh; overflow: hidden; box-sizing: border-box; background-color: {{bg}}; color: {{ink}}; font-family: 'Google Sans Flex', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 28px 28px 0">
 <sc-if value="{{bgDay}}" hint-placeholder-val="{{ true }}"><div class="bgtex bg-day" aria-hidden="true"></div></sc-if>
 <sc-if value="{{bgSunset}}" hint-placeholder-val="{{ false }}"><div class="bgtex bg-sunset" aria-hidden="true"></div></sc-if>
 <sc-if value="{{bgNight}}" hint-placeholder-val="{{ false }}"><div class="bgtex bg-night" aria-hidden="true"></div></sc-if>
@@ -240,7 +250,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 
 <h1 class="title" style="position: relative; z-index: 1; margin: 0; font-family: 'Instrument Serif', serif; font-weight: 400; font-size: clamp(76px, 15.5vw, 236px); line-height: 0.9; letter-spacing: -0.01em; color: {{titleColor}}; -webkit-text-stroke: 1.5px {{titleStroke}}; background-image: {{titleBg}}; -webkit-background-clip: text; background-clip: text; text-align: center; white-space: nowrap">COMING SOON</h1>
 
-<p style="position: relative; z-index: 1; margin: 30px 0 0; font-size: clamp(18px, 1.8vw, 26px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.3; text-align: center; color: {{subtitleColor}}">Meanwhile, help me make some money</p>
+<p class="subtitle" style="position: relative; z-index: 1; margin: 30px 0 0; font-size: clamp(18px, 1.8vw, 26px); font-weight: 600; letter-spacing: -0.03em; line-height: 1.3; text-align: center; color: {{subtitleColor}}">Meanwhile, help me make some money</p>
 
 <div style="margin-top: 30px; min-height: 64px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 20px; position: relative; z-index: 3">
 <sc-if value="{{showStart}}" hint-placeholder-val="{{ true }}">
@@ -322,7 +332,7 @@ a{color:#454A8C}a:hover{color:#2D315F}
 <p>Every landing makes noise, and it fades when you stay on the ground. Each time the meter hits the red zone you get a strike — 3 strikes and my wife wakes up.</p>
 </div>
 </sc-if>
-<div class="ic-keys keys-hint"><span class="key">←</span><span class="key">→</span><span class="ic-keylabel">Move</span><span class="key key-wide">Space</span><span class="ic-keylabel">Jump</span></div>
+<div class="ic-keys keys-hint"><span class="key">A</span><span class="key">D</span><span class="ic-keylabel">Move</span><span class="key key-wide">Space</span><span class="ic-keylabel">Jump</span></div>
 <p class="touch-hint ic-touch">Use the ◀ ▶ buttons to move and ▲ to jump</p>
 <div class="ic-actions">
 <button class="ic-btn ic-btn-main" type="button" onClick="{{go2}}">Let’s go</button>
@@ -706,20 +716,20 @@ class Component extends DCLogic {
     if (t === 'night') return {
       isNight: true,
       bg: '#221A46', bgClass: 'bg-night',
-      ink: '#E0BB54', onInk: '#1A1240', inkHover: '#ECCB72', inkSoft: 'rgba(224,187,84,.16)', sub: '#C4A75F', shadow: 'rgba(14,6,44,.45)',
+      ink: '#E0BB54', onInk: '#1A1240', inkHover: '#ECCB72', inkSoft: 'rgba(224,187,84,.16)', segBg: '#231A4A', sub: '#C4A75F', shadow: 'rgba(14,6,44,.45)',
       titleColor: '#E0BB54', titleStroke: '#E0BB54', titleBg: 'none', subtitleColor: '#E0BB54'
     };
     if (t === 'sunset') return {
       isNight: false,
       bg: '#B5A3E4', bgClass: 'bg-sunset',
-      ink: '#F6DCD8', onInk: '#5A4A9C', inkHover: '#FBE7C9', inkSoft: 'rgba(246,220,216,.22)', sub: '#F3D6D6', shadow: '#815A85',
+      ink: '#F6DCD8', onInk: '#5A4A9C', inkHover: '#FBE7C9', inkSoft: 'rgba(246,220,216,.22)', segBg: '#B9BFF8', sub: '#F3D6D6', shadow: '#815A85',
       titleColor: 'transparent', titleStroke: 'transparent', titleBg: 'linear-gradient(180deg, #EDD1EF 12%, #F3D6D6 50%, #FBE0B5 88%)',
       subtitleColor: '#F6DCD8'
     };
     return {
       isNight: false,
       bg: '#BFD0F2', bgClass: 'bg-day',
-      ink: '#454A8C', onInk: '#FFFFFF', inkHover: '#363B78', inkSoft: 'rgba(69,74,140,.1)', sub: '#6A70A6', shadow: '#B3C0DE',
+      ink: '#454A8C', onInk: '#FFFFFF', inkHover: '#363B78', inkSoft: 'rgba(69,74,140,.1)', segBg: '#BACFF9', sub: '#6A70A6', shadow: '#B3C0DE',
       titleColor: '#454A8C', titleStroke: '#454A8C', titleBg: 'none', subtitleColor: '#454A8C'
     };
   }
@@ -1066,7 +1076,7 @@ class Component extends DCLogic {
       dialog: !!s.dialog,
       bubbleClass: s.dialogOut ? 'bubble out' : 'bubble',
       avatarSrc: this.dialogAva,
-      ...(() => { const cur = this.themeName(); const o = {}; for (const [k, n] of [['day', 'Day'], ['sunset', 'Sunset'], ['night', 'Night']]) { o['t' + n + 'Cls'] = cur === k ? 'tbtn on' : 'tbtn'; o['t' + n + 'On'] = cur === k ? 'true' : 'false'; } return o; })(),
+      ...(() => { const cur = this.themeName(); const o = {}; for (const [k, n] of [['day', 'Day'], ['sunset', 'Sunset'], ['night', 'Night']]) { o['t' + n + 'Cls'] = 'tbtn t-' + k + (cur === k ? ' on' : ''); o['t' + n + 'On'] = cur === k ? 'true' : 'false'; } return o; })(),
       pickDay: this.pickDay, pickSunset: this.pickSunset, pickNight: this.pickNight,
       dialogShown: this.dialogLine.slice(0, s.dialogN || 0),
       dialogRest: this.dialogLine.slice(s.dialogN || 0),
@@ -1075,7 +1085,7 @@ class Component extends DCLogic {
       easyOn: s.level === 1 ? 'true' : 'false', hardOn: s.level === 2 ? 'true' : 'false',
       lvlName: s.level === 2 ? 'HARD' : 'EASY', lvlLower: s.level === 2 ? 'Hard' : 'Easy',
       intro: !!s.intro && !s.running,
-      sceneClass: s.running ? 'scene playing' : 'scene',
+      sceneClass: (s.running ? 'scene playing' : 'scene'),
       scoreText: this.fmt(s.score),
       bestText: this.fmt(s.level === 2 ? s.best2 : s.best1),
       level: s.level,
