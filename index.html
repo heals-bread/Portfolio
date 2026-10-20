@@ -280,8 +280,8 @@ a{color:#454A8C}a:hover{color:#2D315F}
 <img class="plant plant-c" ref="{{setP2}}" src="assets/plant-zz.png" alt="" style="position: absolute; right: 4%; bottom: 46px; visibility: {{decorVis}}">
 </div>
 
-<div class="me-shadow" style="position: absolute; left: {{meLeft}}; bottom: 0; width: 180px; height: 26px; z-index: 2; background: {{shadow}}; border-radius: 50%; transform: translateX({{shTx}}) scale({{shScale}})"></div>
-<div class="me me-big" ref="{{setMe}}" style="position: absolute; left: {{meLeft}}; bottom: 6px; z-index: 3; opacity: {{meOpacity}}; transform: translate({{meTx}}, {{meTy}}px)" aria-hidden="true"></div>
+<div class="me-shadow" style="position: absolute; left: {{meLeft}}; bottom: 0; width: 180px; height: 26px; z-index: 2; background: {{shadow}}; border-radius: 50%; transform: translate3d({{shTx}}, 0, 0) scale({{shScale}}); will-change: transform"></div>
+<div class="me me-big" ref="{{setMe}}" style="position: absolute; left: {{meLeft}}; bottom: 6px; z-index: 3; opacity: {{meOpacity}}; transform: translate3d({{meTx}}, {{meTy}}px, 0); will-change: transform" aria-hidden="true"></div>
 <sc-if value="{{dialog}}" hint-placeholder-val="{{ false }}">
 <div class="{{bubbleClass}}" role="status" aria-live="polite">
 <div class="bubble-card" style="background: {{cBg}}; border: 1px solid {{cBorder}}">
@@ -876,6 +876,7 @@ class Component extends DCLogic {
     const sec = dt / 1000;
     const W = this.arena ? this.arena.clientWidth : 1400;
     const H = this.arena ? this.arena.clientHeight : 900;
+    const op = this.meEl && this.meEl.offsetParent; this.meCW = op ? op.clientWidth : W;
     const total = this.roundMs();
     const elapsed = t - this.startT;
     const timeLeft = Math.max(0, total - elapsed);
@@ -1011,7 +1012,7 @@ class Component extends DCLogic {
       this.setState({ running: false, over: true, failed, failReason, score, caught, missed, bills: [], pops: [], obs: [], timeLeft: 0, [key]: best, px: this.px, jump: 0 });
       return;
     }
-    this.setState({ bills: keep, pops, obs, score, caught, missed, timeLeft, noise: Math.round(this.noise), strikes: this.strikes, hits: this.hits, blink: t < this.invulnUntil ? (Math.floor(t / 100) % 2) : 0, inDanger: this.inDanger, px: Math.round(this.px), jump: Math.round(this.jump) });
+    this.setState({ bills: keep, pops, obs, score, caught, missed, timeLeft, noise: Math.round(this.noise), strikes: this.strikes, hits: this.hits, blink: t < this.invulnUntil ? (Math.floor(t / 100) % 2) : 0, inDanger: this.inDanger, px: Math.round(this.px * 10) / 10, jump: Math.round(this.jump * 10) / 10 });
     this.raf = requestAnimationFrame(this.tick);
   }
   fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
@@ -1086,10 +1087,11 @@ class Component extends DCLogic {
       setP0: this.setP0, setP1: this.setP1, setP2: this.setP2,
       verdict,
       timeText: Math.floor(secs / 60) + ':' + String(secs % 60).padStart(2, '0'),
-      meLeft: placed ? s.px + 'px' : '50%',
-      meTx: '-50%',
+      // the character moves by transform only (no `left` changes → no layout per frame; keeps Safari at full fps)
+      meLeft: '50%',
+      meTx: placed ? 'calc(-50% + ' + (s.px - (this.meCW || 0) / 2).toFixed(1) + 'px)' : '-50%',
       meTy: -(s.jump || 0),
-      shTx: '-50%',
+      shTx: placed ? 'calc(-50% + ' + (s.px - (this.meCW || 0) / 2).toFixed(1) + 'px)' : '-50%',
       shScale: Math.max(0.45, 1 - (s.jump || 0) / 260).toFixed(2),
       bills: s.bills.map((b) => ({ id: b.id, v: b.v, x: Math.round(b.x), y: Math.round(b.y), rot: b.rot })),
       pops: s.pops.map((p) => { const a = Math.min(1, (now - p.born) / 800); return { v: p.v, label: p.label || ('+$' + p.v), x: Math.round(p.x0), y: Math.round(p.y0 - 50 * a), o: (1 - a).toFixed(2) }; }),
